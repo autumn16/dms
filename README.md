@@ -1,4 +1,4 @@
-### LƯU Ý: PHIÊN BẢN VUEJS ĐANG ĐƯỢC SỬ DỤNG LÀ VueJS 3
+### LƯU Ý: Phiên bản VueJS đang được sử dụng là VueJS 3.
 Các file tài nguyên được đặt trong thư mục assets, các layout được đặt ở views, điều hướng các layout bằng router.\
 Sử dụng lệnh sau để chạy thử trang web.
 ```sh
