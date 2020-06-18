@@ -8,4 +8,12 @@ Sử dụng lệnh sau để tạo trang web
 ```sh
 $ npm build 
 ``` 
+*** Lưu ý: Trong trường hợp bị lỗi: 
+```sh
+vue-cli-service not found
+``` 
+Thì cần phải cài đặt lại npm 
+```sh
+$ npm install
+``` 
 Các trang web để tham khảo bao gồm https://vuetifyjs.com/ https://cli.vuejs.org/guide/
