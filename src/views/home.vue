@@ -17,14 +17,9 @@
                 Start your exploration with us now !
             </p>
         </div>
-        <!--
-        <div class="buttonPos">
-            <button type="button" class="btn btn-warning" id="faq">Frequently Asked Question</button>
-            <button type="button" class="btn btn-success" id="reg">Register Now!</button>
-        </div>-->
         <div class="buttonPos">
                 <v-btn rounded color="red" dark style="margin-right: 10px;">Frequently Asked Question</v-btn>
-                <v-btn rounded color="blue" dark>Register Now</v-btn>
+                <v-btn rounded color="blue" dark to="signup">Register Now</v-btn>
         </div>
         <div class="myImgDescription"><img src="../assets/img_des.png" height="400px"></div>
         <!--<div class="myNavBarBackground"></div>-->

@@ -28,26 +28,18 @@
               required
             ></v-text-field>
 
-            <v-select
-              v-model="select"
-              :items="items"
-              :rules="[v => !!v || 'Item is required']"
-              label="Item"
-              required
-            ></v-select>
-
             <v-checkbox
               v-model="checkbox"
               :rules="[v => !!v || 'You must agree to continue!']"
-              label="Do you agree?"
+              label="I agree to the term of use"
               required
             ></v-checkbox>
 
             <v-btn
-              color="warning"
-              @click="resetValidation"
+              color="#1219"
+              @click="signUp"
             >
-              Reset Validation
+              Sign Up
             </v-btn>
           </v-form>
         </v-card>
@@ -78,7 +70,7 @@ export default {
 
 .v-form{
   position: relative;
-  left: 100px;
+  left: 140px;
 }
 
 .v-card{
