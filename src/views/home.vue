@@ -18,7 +18,7 @@
             </p>
         </div>
         <div class="buttonPos">
-                <v-btn rounded color="red" dark style="margin-right: 10px; width: auto;">Frequently Asked Question</v-btn>
+                <v-btn rounded color="red" dark style="margin-right: 10px; width: auto;" to="Faq">Frequently Asked Question</v-btn>
                 <v-btn rounded color="blue" dark style="width: auto;" to="signup">Register Now</v-btn>
         </div>
         <div class="myImgDescription"><img src="../assets/img_des.png" height="400px"></div>
@@ -59,7 +59,7 @@ export default {
 }  
 
 #thisContainer{
-    background-image: url("../assets/wallpaper.jpg");
+    background-image: url("https://images.wallpapersden.com/image/download/4k-natural-gradient_67713_1920x1080.jpg");
     background-size: cover;
     height: 1;
 }
