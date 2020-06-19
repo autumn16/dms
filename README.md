@@ -17,5 +17,5 @@ Thì cần phải cài đặt lại npm
 $ npm install
 ``` 
 ### ---------------------------------------------------------------------
-Style của từng trang phải đượd đặt tầm vực là scoped, vd: <style scoped></style> 
+Style của từng trang phải được đặt tầm vực là scoped, vd: ```<style scoped></style>```\
 Các trang web để tham khảo bao gồm https://vuetifyjs.com/ https://cli.vuejs.org/guide/
