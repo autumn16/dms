@@ -6,7 +6,7 @@ $ npm run serve
 ``` 
 Sử dụng lệnh sau để tạo trang web
 ```sh
-$ npm build 
+$ npm run build 
 ``` 
 *** Lưu ý: Trong trường hợp bị lỗi: 
 ```sh
@@ -16,4 +16,6 @@ Thì cần phải cài đặt lại npm
 ```sh
 $ npm install
 ``` 
+### ---------------------------------------------------------------------
+Style của từng trang phải đượd đặt tầm vực là scoped, vd: <style scoped></style> 
 Các trang web để tham khảo bao gồm https://vuetifyjs.com/ https://cli.vuejs.org/guide/
