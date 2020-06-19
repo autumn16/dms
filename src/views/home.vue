@@ -18,8 +18,8 @@
             </p>
         </div>
         <div class="buttonPos">
-                <v-btn rounded color="red" dark style="margin-right: 10px;">Frequently Asked Question</v-btn>
-                <v-btn rounded color="blue" dark to="signup">Register Now</v-btn>
+                <v-btn rounded color="red" dark style="margin-right: 10px; width: auto;">Frequently Asked Question</v-btn>
+                <v-btn rounded color="blue" dark style="width: auto;" to="signup">Register Now</v-btn>
         </div>
         <div class="myImgDescription"><img src="../assets/img_des.png" height="400px"></div>
         <!--<div class="myNavBarBackground"></div>-->
