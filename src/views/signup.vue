@@ -42,7 +42,7 @@
             ></v-text-field>
 
             <v-text-field
-              color="white"
+              color="white  "
               v-model="Email"
               :rules="Email"
               label="Your Email"
@@ -62,11 +62,11 @@
               color="hsl(227, 58%, 65%)"
               @click="signUp"
             >
-              Sign Up
+              Continue
             </v-btn>
 
             <div class="termOfUse">
-              <p>By registering, you agree to DMS's <b>Term of Service</b> and <b>Privacy Policy</b></p>
+              <p>By registering, you have agreed to DMS's <b>Term of Service</b> and <b>Privacy Policy</b></p>
             </div>
 
           </v-form>
@@ -89,7 +89,7 @@ export default {
 }
 
 .signUpDescription{
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   color: white;
   margin-top: 24px;
