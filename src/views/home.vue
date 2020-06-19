@@ -1,11 +1,11 @@
 <template>
     <v-container id="thisContainer" fill-height fluid>
-       <div class="myPageName"><img src="../assets/page_logo.png" height="60px"></div>
+       <div class="myPageName"><img src="../assets/home-logo.png" height="60px"></div>
         <div class="myNavBar" style="width: 100%;">
             <ul>
                 <li><a href="#" id="about">About Us</a></li>
                 <li><a href="#" id="news">News</a></li>
-                <li><a href="#" id="signIn" style="padding-right:20px; position:relative;">Sign In</a></li>
+                <li><a href="./signin" id="signIn" style="padding-right:20px; position:relative;">Sign In</a></li>
             </ul>
         </div>  
         <div class="myTitleDescription" id="titleDes">
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
