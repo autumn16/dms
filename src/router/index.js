@@ -5,6 +5,7 @@ import Home from '../views/home'
 import SignUp from '../views/signup'
 import SignIn from '../views/signin'
 import Faq from '../views/faq'
+import Admin from '../views/admin'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/SignUp',
+    path: '/Sign-Up',
     name: 'signingup',
     component: SignUp,
   },
@@ -25,9 +26,14 @@ const routes = [
     component: SignIn,
   },
   {
-    path: '/Faq',
+    path: '/frequently-asked-question',
     name: 'faq',
     component: Faq,
+  },
+  {
+    path: '/dormitory-manager-dashboard',
+    name: 'admindashboard',
+    component: Admin,
   }
 ]
 
@@ -36,5 +42,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
 
 export default router

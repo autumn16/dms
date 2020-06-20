@@ -19,34 +19,36 @@
           
             <v-text-field
               dark
-              v-model="name"
-              :counter="10"
-              :rules="nameRules"
+              v-model="username"
               outlined
               label="Username"
+              id="username-input"
               required
             ></v-text-field>
 
             <v-text-field
               dark
-              v-model="Password"
-              :rules="Password"
+              v-model="password"
               outlined
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               @click:append="show1 = !show1"
               label="Password"
+              id="password-input"
               required
             ></v-text-field>
+
             <div class="forgotPassword">
               <a href="/" style="text-decoration:none; color:hsl(227, 58%, 65%);">Forgot your password?</a>
             </div>
+
             <v-btn class ="white--text"
               color="hsl(227, 58%, 65%)"
-              @click="signUp"
+              @click="checkSigningIn"
             >
               Continue
             </v-btn>
+
           </v-form>
         </v-card>
     </v-app>
@@ -54,7 +56,21 @@
 
 <script>
 export default {
-
+data: () => ({ 
+  username: "",
+  password: "",
+}),
+methods: {
+  checkSigningIn(){
+    let username = this.username;
+    let password = this.password;
+    if(username==="admin" && password==="admin"){
+        this.$router.replace("/dormitory-manager-dashboard");
+    } else {
+        alert("Wrong username or password!");
+    }
+  }
+}
 }
 </script>
 
