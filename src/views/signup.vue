@@ -15,12 +15,10 @@
             v-model="valid"
             lazy-validation
           >
-          
             <v-text-field
               dark
-              v-model="name"
-              :counter="10"
-              :rules="nameRules"
+              v-model="username"
+              :rules="usernameRules"
               outlined
               label="Username"
               required
@@ -28,39 +26,77 @@
 
             <v-text-field
               dark
-              v-model="Password"
-              :rules="Password"
-              outlined
+              v-model="password"
+              :rules="passwordRules"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               @click:append="show1 = !show1"
+              outlined
               label="Password"
               required
             ></v-text-field>
 
             <v-text-field
               dark
-              v-model="RePassword"
-              :rules="RePassword"
+              v-model="rePassword"
+              :rules="rePasswordRules"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show2 ? 'text' : 'password'"
+              @click:append="show2 = !show2"
               outlined
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              @click:append="show1 = !show1"
               label="Re-enter password"
               required
             ></v-text-field>
 
             <v-text-field
               dark
-              v-model="Email"
-              :rules="Email"
+              v-model="email"
+              :rules="emailRules"
               outlined
-              label="Your Email"
+              label="Email"
               required
             ></v-text-field>
 
-            <v-btn class ="white--text"
-              color="hsl(227, 58%, 65%)"
+            <v-text-field
+              dark
+              v-model="fullName"
+              :rules="fullNameRules"
+              outlined
+              label="Full name"
+              required
+            ></v-text-field>
+
+            <v-text-field
+              dark
+              v-model="studentID"
+              :rules="studentIDRules"
+              outlined
+              label="Student ID"
+              required
+            ></v-text-field>
+
+            <v-text-field
+              dark
+              v-model="university"
+              :rules="universityRules"
+              outlined
+              label="University"
+              required
+            ></v-text-field>
+
+            <v-text-field
+              dark
+              v-model="citizenID"
+              :rules="citizenIDRules"
+              outlined
+              label="Citizen ID"
+              required
+            ></v-text-field>
+
+            <v-btn 
+              class ="white--text"
+              color="primary"
+              :disabled="!valid"
               @click="signUp"
             >
               Continue
@@ -77,14 +113,63 @@
 
 <script>
 export default {
+  data () {
+    return {
+      valid: true,
+      show1: false,
+      show2: false,
+      username: '',
+      password: '',
+      rePassword: '',
+      email: '',
+      fullName: '',
+      studentID: '',
+      university: '',
+      citizenID: '',
 
+      usernameRules: [
+        v => !!v || 'User is required',
+        v => (v && v.length <= 25) || 'Name must be less than 25 characters',
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 6) || 'Password must have at least 6 characters',
+      ],
+      rePasswordRules: [
+        v => !!v || "Re-enter password is required",
+        v => (v === this.password) || "Password do not match"
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      fullNameRules: [
+        v => !!v || 'Full name is required',
+      ],
+      studentIDRules: [
+        v => !!v || 'Student ID is required',
+      ],
+      universityRules: [
+        v => !!v || "University is required",
+      ],
+      citizenIDRules: [
+        v => !!v || "Citizen ID is required"
+      ]
+    }
+  },
+
+  method: {
+    signUp: async  function () {
+      this.$refs.form.validate()
+    },
+
+  }
 }
 </script>
 
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
 .termOfUse{
@@ -104,7 +189,7 @@ export default {
 #signUpContainer{
   background-image: url("../assets/tsignup_img.jpg");
   background-size: cover;
-  height: 1;
+  height: 60rem;
 }
 
 .v-btn{
@@ -130,7 +215,7 @@ export default {
   position: absolute;
   width: 440px;
   left: 548px;
-  height: 520px;
+  height: 54rem;
   top:  100px;
 }
 
