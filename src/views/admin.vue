@@ -87,9 +87,8 @@
                             Your Notification
                           </v-card-title>
                           <v-textarea
-                            solo
+                            outlined
                             style="margin-left: 10px; margin-right: 10px;"
-                            label="write down your notification here and click send notification"
                             :value="`${informText}`"
                           >
 

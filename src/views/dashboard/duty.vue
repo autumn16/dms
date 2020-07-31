@@ -46,28 +46,63 @@
       </v-row>
       <v-content>
         <v-row>
-          <v-col md="1">
-          </v-col>
+          <v-col md="1"></v-col>
           <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 10px black;">
-             It's {{ timestamp }}
-            </h2>
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="1">
+          <v-col md="1"></v-col>
+          <v-col md="auto">
+            <v-btn rounded color="primary" style="margin-top: -10px;" @click="addNewDuty = true">
+              <v-icon>mdi-plus</v-icon>Add new duty
+            </v-btn>
+            <v-dialog v-model="addNewDuty" width="600px">
+              <v-card>
+                <v-card-title>Adding new duty</v-card-title>
+                <v-form>
+                  <v-text-field
+                    v-model="dutyName"
+                    placeholder="Duty Name"
+                    outlined
+                    style="margin-left: 20px; margin-right: 20px;"
+                  ></v-text-field>
+                  <v-textarea
+                    v-model="dutyContent"
+                    placeholder="Duty Content"
+                    outlined
+                    style="margin-left: 20px; margin-right: 20px; margin-top: -15px;"
+                  ></v-textarea>
+                </v-form>
+                <v-spacer></v-spacer>
+                <v-card-actions style="margin-left: 10px; margin-top: -30px; margin-bottom: 20px;">
+                  <v-btn color="green darken-1" text @click="createNewDuty()">Add Duty</v-btn>
+                  <v-btn color="red darken-1" text @click="addNewDuty = false">
+                    Exit
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col md='1'>
+
           </v-col>
           <v-col md="auto">
-            <v-btn
-              tile
-              color="primary"
-              style="margin-top: -10px;"
+            <v-card
+              :key="n" v-for="n in dutyNumber"
+              width="800"
+              height="300"
+              style="margin-bottom: 10px;"
             >
-              <v-icon>
-                mdi-plus
-              </v-icon>
-              Add new duty
-            </v-btn>
+              <v-card-title>
+                {{ duty.name[n - 1]}}
+              </v-card-title>
+              <v-card-text>
+                {{ duty.content[n - 1]}}
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-content>
@@ -79,7 +114,16 @@
 export default {
   data() {
     return {
-      timestamp: '',
+      cardTitle: 'INFORMATION ABOUT NATIONAL CONFERENCE',
+      dutyName: '',
+      dutyContent: '',
+      duty: {
+          name: [],
+          content: [],
+      },
+      dutyNumber: 0,
+      addNewDuty: false,
+      timestamp: "",
       expanded: [],
       singleExpand: false,
       drawer: true,
@@ -132,18 +176,23 @@ export default {
         : undefined;
     },
   },
-  created () {
+  created() {
     setInterval(this.getNow, 1000);
-    this.getNow()
+    this.getNow();
   },
   methods: {
-   getNow: function() {
+    createNewDuty() {
+      this.duty.name[this.dutyNumber] = this.dutyName;
+      this.duty.content[this.dutyNumber] = this.dutyContent;
+      this.dutyNumber += 1
+    },
+    getNow() {
       const today = new Date();
-      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() ;
       const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const dateTime = date +' '+ time;
+      const dateTime = date + " " + time;
       this.timestamp = dateTime;
-    }
+    },
   },
 };
 </script>
