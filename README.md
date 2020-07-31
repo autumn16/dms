@@ -1,3 +1,4 @@
+
 ### LƯU Ý: Phiên bản VueJS đang được sử dụng là VueJS 3.
 Các file tài nguyên được đặt trong thư mục assets, các layout được đặt ở views, điều hướng các layout bằng router.\
 Sử dụng lệnh sau để chạy thử trang web.
@@ -19,3 +20,4 @@ $ npm install
 ### ---------------------------------------------------------------------
 Style của từng trang phải được đặt tầm vực là scoped, vd: ```<style scoped></style>```\
 Các trang web để tham khảo bao gồm https://vuetifyjs.com/ https://cli.vuejs.org/guide/
+>>>>>>> origin/danh-branch

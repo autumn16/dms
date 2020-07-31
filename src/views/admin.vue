@@ -1,15 +1,268 @@
 <template>
-  <div>
-    <h1> THIS IS ADMIN VIEW </h1>
+  <div class="adminimage">
+    <v-container>
+      <v-row>
+        <v-col md="auto">
+          <v-navigation-drawer
+            v-model="drawer"
+            :color="color"
+            :expand-on-hover="expandOnHover"
+            :mini-variant="miniVariant"
+            :permanent="permanent"
+            :src="bg"
+            absolute
+            dark
+          >
+            <v-list dense nav class="py-0">
+              <v-list-item two-line :class="miniVariant && 'px-0'">
+                <v-list-item-avatar>
+                  <img src="../assets/signup_img.jpg" />
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>Admin</v-list-item-title>
+                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <!--<v-list-item link>-->
+
+              <v-list-item v-for="item in items" :key="item.title" link>
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+
+                <router-link :to="item.link">
+                  <v-list-item-content>
+                    <v-list-item-title style="color: white; text-decoration: none;">{{ item.title }}</v-list-item-title>
+                  </v-list-item-content>
+                </router-link>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col md="auto">
+          <v-card style="margin-left: 150px; margin-right: -140px;" light>
+            <v-card-title>
+              List of Student
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+            <v-data-table
+              :headers="headers"
+              :items="users"
+              :search="search"
+              :single-expand="singleExpand"
+              :expanded.sync="expanded"
+              item-key="name"
+              show-expand
+            >
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  <v-btn
+                    tile
+                    color="primary"
+                    style="margin-left: 50px; font-size: 12px;"
+                  >Send Notification</v-btn>
+                  <v-btn
+                    tile
+                    color="error"
+                    style="margin-left: 5px; font-size: 12px;"
+                  >Inform {{item.name}} to his late payment</v-btn>
+                </td>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
 export default {
-    
-}
+  data() {
+    return {
+      expanded: [],
+      singleExpand: false,
+      drawer: true,
+      items: [
+        {
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          link: "dormitory-manager-dashboard",
+        },
+        {
+          title: "Duty",
+          icon: "mdi-hours-24",
+          link: "dormitory-manager-dashboard/duty",
+        },
+        {
+          title: "Security",
+          icon: "mdi-security",
+          link: "dormitory-manager-dashboard/security",
+        },
+        {
+          title: "Student's Health",
+          icon: "mdi-cards-heart",
+          link: "dormitory-manager-dashboard/health",
+        },
+        {
+          title: "Student's Feedback",
+          icon: "mdi-chat",
+          link: "dormitory-manager-dashboard/feedback",
+        },
+        {
+          title: "Sanitation (COVID-19)",
+          icon: "mdi-hand-water",
+          link: "dormitory-manager-dashboard/sanitation",
+        },
+        {
+          title: "Visitor Record",
+          icon: "mdi-clover",
+          link: "dormitory-manager-dashboard/record",
+        },
+        { title: "Logout", 
+          icon: "mdi-logout-variant", 
+          link: "../signin" 
+        },
+      ],
+      permanent: true,
+      background: true,
+
+      search: "",
+      headers: [
+        {
+          text: "Dorm UID",
+          align: "start",
+          sortable: true,
+          value: "dormUID",
+        },
+        { text: "Name", value: "name" },
+        { text: "Citizen ID", value: "citizenID" },
+        { text: "Room", value: "room" },
+        { text: "Email", value: "email" },
+        { text: "Phone Number", value: "phone" },
+        { text: "Student ID", value: "studentID" },
+        { text: "University", value: "uni" },
+      ],
+      users: [
+        {
+          dormUID: "1811298",
+          name: "Quan Thanh Tho",
+          citizenID: 6.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 24,
+          uni: "University of Law",
+        },
+        {
+          dormUID: "1811299",
+          name: "Bui Hoang Thang",
+          citizenID: 9.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 37,
+          uni: "University of Economics",
+        },
+        {
+          dormUID: "1811270",
+          name: "Nguyen An Khuong",
+          citizenID: 16.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 23,
+          uni: "University of Science",
+        },
+        {
+          dormUID: "1811271",
+          name: "Le Dinh Duy",
+          citizenID: 3.7,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 67,
+          uni: "Bach Khoa University",
+        },
+        {
+          dormUID: "1811272",
+          name: "Luu Minh Tri",
+          citizenID: 16.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 49,
+          uni: "Bach Khoa University",
+        },
+        {
+          dormUID: "1811273",
+          name: "Nguyen Luan",
+          citizenID: 0.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 94,
+          uni: "Bach Khoa University",
+        },
+        {
+          dormUID: "1811274",
+          name: "Tran Nhu Buu",
+          citizenID: 0.2,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 98,
+          uni: "Bach Khoa University",
+        },
+        {
+          dormUID: "1811275",
+          name: "Pham Tho Quoc Long",
+          citizenID: 3.2,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 87,
+          uni: "Bach Khoa University",
+        },
+        {
+          dormUID: "1811276",
+          name: "Huynh Bach Khoa",
+          citizenID: 25.0,
+          room: "1120AH1",
+          email: "tri.luuminh@hcmut.edu.vn",
+          phone: "0929347800",
+          studentID: 51,
+          uni: "Bach Khoa University",
+        },
+      ],
+    };
+  },
+  computed: {
+    bg() {
+      return this.background
+        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+        : undefined;
+    },
+  },
+};
 </script>
 
 <style scoped>
-
+.adminimage {
+  background-image: url("../assets/signup_img.jpg");
+  height: 100%;
+}
 </style>
