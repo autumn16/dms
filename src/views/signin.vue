@@ -65,7 +65,7 @@ methods: {
     let username = this.username;
     let password = this.password;
     if(username==="admin" && password==="admin"){
-        this.$router.replace("/dormitory-manager-dashboard");
+        this.$router.replace("/dashboard");
     } else {
         alert("Wrong username or password!");
     }

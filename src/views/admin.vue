@@ -97,7 +97,7 @@
                           <v-checkbox
                             style="margin-left: 10px; margin-top: -20px;"
                             :label="`Inform ${item.name} to his/her late payment`"
-                            @click="informText = `*** YOU'RE LATE FOR   PAYMENT ***` "
+                            @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
                           >
                           </v-checkbox>
                           <v-card-actions>
@@ -108,15 +108,6 @@
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
-                      <!--
-                      <v-btn
-                        tile
-                        color="error"
-                        style="margin-left: 5px; font-size: 12px;"
-                      >
-                        Inform {{item.name}} to his late payment
-                      </v-btn>
-                      -->
                   </td>
                 </template>
               </v-data-table>
@@ -142,42 +133,42 @@ export default {
         {
           title: "Dashboard",
           icon: "mdi-view-dashboard",
-          link: "dormitory-manager-dashboard",
+          link: "dashboard",
         },
         {
           title: "Duty",
           icon: "mdi-hours-24",
-          link: "dormitory-manager-dashboard/duty",
+          link: "dashboard/duty",
         },
         {
           title: "Security",
           icon: "mdi-security",
-          link: "dormitory-manager-dashboard/security",
+          link: "dashboard/security",
         },
         {
           title: "Student's Health",
           icon: "mdi-cards-heart",
-          link: "dormitory-manager-dashboard/health",
+          link: "dashboard/health",
         },
         {
           title: "Student's Feedback",
           icon: "mdi-chat",
-          link: "dormitory-manager-dashboard/feedback",
+          link: "dashboard/feedback",
         },
         {
           title: "Sanitation (COVID-19)",
           icon: "mdi-hand-water",
-          link: "dormitory-manager-dashboard/sanitation",
+          link: "dashboard/sanitation",
         },
         {
           title: "Visitor Record",
           icon: "mdi-clover",
-          link: "dormitory-manager-dashboard/record",
+          link: "dashboard/record",
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
       ],
       permanent: true,
-      background: true,
+      background: false,
 
       search: "",
       headers: [
