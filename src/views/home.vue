@@ -8,7 +8,7 @@
           id="nav"
         >
           <v-col md="0" style="margin-left: 40px;">
-            <img src="../assets/home-logo.png" width="200px" height="auto" />
+            <img src="../assets/home-logo.png" width="250px" height="auto" />
           </v-col>
           <v-col md="auto">
             <router-link
@@ -25,7 +25,7 @@
 						</router-link>
             <router-link
               id="menu"
-              to="./signin"
+              to="./sign-in"
             >
 							Sign In
 						</router-link>

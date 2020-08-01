@@ -103,6 +103,7 @@
                             :label="`Inform ${item.name} to his/her late payment`"
                             @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
                           >
+                          
                           </v-checkbox>
                           <v-card-actions>
                             <v-spacer></v-spacer>
@@ -169,7 +170,7 @@ export default {
           icon: "mdi-clover",
           link: "dashboard/record",
         },
-        { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
+        { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
       ],
       permanent: true,
       background: false,
