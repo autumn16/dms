@@ -180,16 +180,19 @@ export default {
     setInterval(this.getNow, 1000);
     this.getNow();
   },
+
   methods: {
     createNewDuty() {
       this.duty.name[this.dutyNumber] = this.dutyName;
       this.duty.content[this.dutyNumber] = this.dutyContent;
       this.dutyNumber += 1
     },
+  
     getNow() {
       const today = new Date();
       const date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() ;
-      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const time = (today.getHours()<10?'0'+today.getHours():today.getHours())+ ":" + (today.getMinutes()<10?'0'+today.getMinutes():today.getMinutes())
+         + ":" + (today.getSeconds()<10?'0'+today.getSeconds():today.getSeconds());
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
