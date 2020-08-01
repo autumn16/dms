@@ -73,7 +73,7 @@
                 </v-form>
                 <v-spacer></v-spacer>
                 <v-card-actions style="margin-left: 10px; margin-top: -30px; margin-bottom: 20px;">
-                  <v-btn color="green darken-1" text @click="createNewDuty()">Add sanitaiton state</v-btn>
+                  <v-btn color="green darken-1" text @click="createNewDuty()">Add sanitation state</v-btn>
                   <v-btn color="red darken-1" text @click="addNewDuty = false">Exit</v-btn>
                 </v-card-actions>
               </v-card>
