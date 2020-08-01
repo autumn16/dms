@@ -7,6 +7,7 @@ import SignIn from '../views/signin'
 import Faq from '../views/faq'
 import Admin from '../views/admin'
 import AdminDuty from '../views/dashboard/duty'
+import UserView from '../views/user-view/report'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: `/dashboard/duty`,
     name: 'DashboardDuty',
     component: AdminDuty,
+  },
+  {
+    path: `/user-view/report`,
+    name: 'user-report',
+    component: UserView,
   }
 ]
 

@@ -13,6 +13,7 @@
             absolute
             dark
           >
+        
              <v-list dense nav class="py-0">
               <v-list-item two-line :class="miniVariant && 'px-0'">
                 <v-list-item-avatar>
@@ -20,9 +21,10 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-
+<!-- 
                  <v-list-item-title>Admin</v-list-item-title>
-                  <v-list-item-subtitle>Last sigaaddning up: 26/07/2020</v-list-item-subtitle>
+                 <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
+    
                 </v-list-item-content>
               </v-list-item>
 
@@ -131,6 +133,9 @@ export default {
       drawer: true,
       items: [
         {
+          username:"test"
+        },
+        {
           title: "Dashboard",
           icon: "mdi-view-dashboard",
           link: "dashboard",
@@ -178,17 +183,12 @@ export default {
           sortable: true,
           value: "dormUID",
         },
-        { text: "Content", value: "name" },
-        { text: "Citizen ID", value: "citizenID" },
-        { text: "Room", value: "room" },
-        { text: "Email", value: "email" },
-        { text: "Phone Number", value: "phone" },
-        { text: "Student ID", value: "studentID" },
-        { text: "University", value: "uni" },
-      ],
+        { text: "Title", value: "name" },
+        { text: "Content", value: "citizenID" },
+       ],
       users: [
         {
-          dormUID: "1811298",
+          dormUID: "12-31-2020",
           name: "Quan Thanh Tho",
           citizenID: 6.0,
           room: "1120AH1",
