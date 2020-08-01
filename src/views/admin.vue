@@ -1,6 +1,7 @@
 <template>
-  <div class="adminimage">
-    <v-container>
+  <div>
+  <span id="background"></span>
+    <v-app>
       <v-row>
         <v-col md="auto">
           <v-navigation-drawer
@@ -51,7 +52,7 @@
       <v-content>
         <v-row align="center" justify="center">
           <v-col md="auto">
-            <v-card style="margin-left: 130px; margin-right: -140px;" light>
+            <v-card style="margin-left: 120px; margin-right: -120px;" light>
               <v-card-title>
                 List of Student
                 <v-spacer></v-spacer>
@@ -118,7 +119,7 @@
           </v-col>
         </v-row>
       </v-content>
-    </v-container>
+    </v-app>
   </div>
 </template>
 
@@ -294,8 +295,13 @@ export default {
 </script>
 
 <style scoped>
-.adminimage {
-  background-image: url("../assets/signup_img.jpg");
+#background {
+  /*ackground-image: url("../assets/signup_img.jpg");*/
+  background: #0F2027; 
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
-  <div class="adminimage">
-    <v-container>
-      <v-row>
-        <v-col md="auto">
+  <div>
+  <span id="background"></span>
+    <v-app>
           <v-navigation-drawer
             v-model="drawer"
             :color="color"
@@ -42,17 +41,15 @@
               </v-list-item>
             </v-list>
           </v-navigation-drawer>
-        </v-col>
-      </v-row>
       <v-content>
         <v-row>
-          <v-col md="1"></v-col>
+          <v-col md="3"></v-col>
           <v-col md="auto">
             <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="1"></v-col>
+          <v-col md="3"></v-col>
           <v-col md="auto">
             <v-btn rounded color="primary" style="margin-top: -10px;" @click="addNewDuty = true">
               <v-icon>mdi-plus</v-icon>Add new security record
@@ -86,7 +83,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col md='1'>
+          <v-col md='3'>
 
           </v-col>
           <v-col md="auto">
@@ -112,7 +109,7 @@
           </v-col>
         </v-row>
       </v-content>
-    </v-container>
+    </v-app>
   </div>
 </template>
 
@@ -204,8 +201,13 @@ export default {
 </script>
 
 <style scoped>
-.adminimage {
-  background-image: url("../../assets/signup_img.jpg");
+#background {
+  /*ackground-image: url("../assets/signup_img.jpg");*/
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 </style>

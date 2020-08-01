@@ -1,58 +1,55 @@
 <template>
-  <div class="adminimage">
-    <v-container>
-      <v-row>
-        <v-col md="auto">
-          <v-navigation-drawer
-            v-model="drawer"
-            :color="color"
-            :expand-on-hover="expandOnHover"
-            :mini-variant="miniVariant"
-            :permanent="permanent"
-            :src="bg"
-            absolute
-            dark
-          >
-            <v-list dense nav class="py-0">
-              <v-list-item two-line :class="miniVariant && 'px-0'">
-                <v-list-item-avatar>
-                  <img src="../../assets/signup_img.jpg" />
-                </v-list-item-avatar>
+  <div>
+    <span id="background"></span>
+    <v-app>
+      <v-navigation-drawer
+        v-model="drawer"
+        :color="color"
+        :expand-on-hover="expandOnHover"
+        :mini-variant="miniVariant"
+        :permanent="permanent"
+        :src="bg"
+        absolute
+        dark
+      >
+        <v-list dense nav class="py-0">
+          <v-list-item two-line :class="miniVariant && 'px-0'">
+            <v-list-item-avatar>
+              <img src="../../assets/signup_img.jpg" />
+            </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title>Admin</v-list-item-title>
-                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Admin</v-list-item-title>
+              <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-              <v-divider></v-divider>
+          <v-divider></v-divider>
 
-              <!--<v-list-item link>-->
+          <!--<v-list-item link>-->
 
-              <v-list-item v-for="item in items" :key="item.title" link>
-                <v-list-item-icon>
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
 
-                <router-link :to="item.link" style="text-decoration: none;">
-                  <v-list-item-content>
-                    <v-list-item-title style="color: white;">{{ item.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </router-link>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
-        </v-col>
-      </v-row>
+            <router-link :to="item.link" style="text-decoration: none;">
+              <v-list-item-content>
+                <v-list-item-title style="color: white; text-decoration: none;">{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </router-link>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
       <v-content>
         <v-row>
-          <v-col md="1"></v-col>
+          <v-col md="3"></v-col>
           <v-col md="auto">
             <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="1"></v-col>
+          <v-col md="3"></v-col>
           <v-col md="auto">
             <v-btn rounded color="primary" style="margin-top: -10px;" @click="addNewDuty = true">
               <v-icon>mdi-plus</v-icon>Add new visitor record
@@ -62,8 +59,8 @@
                 <v-card-title>Visitor record</v-card-title>
                 <v-form>
                   <v-text-field
-                    v-model="caseName"
-                    placeholder="Record name"
+                    v-model="dutyName"
+                    placeholder="Case Name"
                     outlined
                     style="margin-left: 20px; margin-right: 20px;"
                   ></v-text-field>
@@ -76,43 +73,31 @@
                 </v-form>
                 <v-spacer></v-spacer>
                 <v-card-actions style="margin-left: 10px; margin-top: -30px; margin-bottom: 20px;">
-                  <v-btn color="green darken-1" text @click="createNewDuty()">Add record</v-btn>
-                  <v-btn color="red darken-1" text @click="addNewDuty = false">
-                    Exit
-                  </v-btn>
+                  <v-btn color="green darken-1" text @click="createNewDuty()">Add visitor record</v-btn>
+                  <v-btn color="red darken-1" text @click="addNewDuty = false">Exit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-col>
         </v-row>
         <v-row>
-          <v-col md='1'>
-
-          </v-col>
+          <v-col md="3"></v-col>
           <v-col md="auto">
             <v-card
-              :key="n" v-for="n in dutyNumber"
+              :key="n"
+              v-for="n in dutyNumber"
               width="800"
               height="300"
               style="margin-bottom: 10px;"
             >
-              <v-card-title
-                style="color: red; font-size: 30px;"
-              >
-                {{ duty.name[n - 1]}}
-              </v-card-title>
-              <v-card-text
-                style="color: black; font-size: 18px;"
-              >
-                {{ duty.content[n - 1]}}
-              </v-card-text>
-              <v-card-actions>
-              </v-card-actions>
+              <v-card-title style="color: blue; font-size: 30px;">{{ duty.name[n - 1]}}</v-card-title>
+              <v-card-text style="color: black; font-size: 18px;">{{ duty.content[n - 1]}}</v-card-text>
+              <v-card-actions></v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-content>
-    </v-container>
+    </v-app>
   </div>
 </template>
 
@@ -120,11 +105,11 @@
 export default {
   data() {
     return {
-      dutyName: '',
-      dutyContent: '',
+      dutyName: "",
+      dutyContent: "",
       duty: {
-          name: [],
-          content: [],
+        name: [],
+        content: [],
       },
       dutyNumber: 0,
       addNewDuty: false,
@@ -189,12 +174,18 @@ export default {
     createNewDuty() {
       this.duty.name[this.dutyNumber] = this.dutyName;
       this.duty.content[this.dutyNumber] = this.dutyContent;
-      this.dutyNumber += 1
+      this.dutyNumber += 1;
     },
     getNow() {
       const today = new Date();
-      const date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() ;
-      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const date =
+        today.getDate() +
+        "/" +
+        (today.getMonth() + 1) +
+        "/" +
+        today.getFullYear();
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
@@ -203,8 +194,13 @@ export default {
 </script>
 
 <style scoped>
-.adminimage {
-  background-image: url("../../assets/signup_img.jpg");
+#background {
+  /*ackground-image: url("../assets/signup_img.jpg");*/
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 </style>
