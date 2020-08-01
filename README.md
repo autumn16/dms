@@ -16,6 +16,9 @@ Thì cần phải cài đặt lại npm
 ```sh
 $ npm install
 ``` 
+Tài khoản để đăng nhập vào manager view là:\
+username: admin\
+password: admin
 ### ---------------------------------------------------------------------
 Style của từng trang phải được đặt tầm vực là scoped, vd: ```<style scoped></style>```\
 Các trang web để tham khảo bao gồm https://vuetifyjs.com/ https://cli.vuejs.org/guide/

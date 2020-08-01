@@ -65,7 +65,7 @@ methods: {
     let username = this.username;
     let password = this.password;
     if(username==="admin" && password==="admin"){
-        this.$router.replace("/dormitory-manager-dashboard");
+        this.$router.replace("/dashboard");
     } else {
         alert("Wrong username or password!");
     }
@@ -77,7 +77,6 @@ methods: {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
 .forgotPassword{

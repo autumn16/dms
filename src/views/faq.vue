@@ -95,7 +95,6 @@ export default {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
 .pad-for-faq{

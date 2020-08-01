@@ -6,6 +6,7 @@ import SignUp from '../views/signup'
 import SignIn from '../views/signin'
 import Faq from '../views/faq'
 import Admin from '../views/admin'
+import AdminDuty from '../views/dashboard/duty'
 
 Vue.use(VueRouter)
 
@@ -27,13 +28,18 @@ const routes = [
   },
   {
     path: '/frequently-asked-question',
-    name: 'faq',
+    name: 'FreAskQues',
     component: Faq,
   },
   {
-    path: '/dormitory-manager-dashboard',
-    name: 'admindashboard',
+    path: '/dashboard',
+    name: 'AdminDashboard',
     component: Admin,
+  },
+  {
+    path: `/dashboard/duty`,
+    name: 'DashboardDuty',
+    component: AdminDuty,
   }
 ]
 
