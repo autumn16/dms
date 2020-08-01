@@ -34,9 +34,13 @@
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
 
-                <router-link :to="item.link">
+                <router-link :to="item.link" style="text-decoration: none;">
                   <v-list-item-content>
-                    <v-list-item-title style="color: white; text-decoration: none;">{{ item.title }}</v-list-item-title>
+                    <v-list-item-title 
+                      style="color: white"
+                    >
+                      {{ item.title }}
+                    </v-list-item-title>
                   </v-list-item-content>
                 </router-link>
               </v-list-item>
@@ -45,9 +49,9 @@
         </v-col>
       </v-row>
       <v-content>
-        <v-row align="center">
+        <v-row align="center" justify="center">
           <v-col md="auto">
-            <v-card style="margin-left: 150px; margin-right: -140px;" light>
+            <v-card style="margin-left: 130px; margin-right: -140px;" light>
               <v-card-title>
                 List of Student
                 <v-spacer></v-spacer>

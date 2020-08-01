@@ -34,7 +34,7 @@
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
 
-                <router-link :to="item.link">
+                <router-link :to="item.link" style="text-decoration: none;">
                   <v-list-item-content>
                     <v-list-item-title style="color: white; text-decoration: none;">{{ item.title }}</v-list-item-title>
                   </v-list-item-content>
@@ -59,7 +59,7 @@
             </v-btn>
             <v-dialog v-model="addNewDuty" width="600px">
               <v-card>
-                <v-card-title>Adding new duty</v-card-title>
+                <v-card-title>Add new duty</v-card-title>
                 <v-form>
                   <v-text-field
                     v-model="dutyName"
@@ -96,12 +96,18 @@
               height="300"
               style="margin-bottom: 10px;"
             >
-              <v-card-title>
+              <v-card-title
+                style="color: blue; font-size: 30px;"
+              >
                 {{ duty.name[n - 1]}}
               </v-card-title>
-              <v-card-text>
+              <v-card-text
+                style="color: black; font-size: 18px;"
+              >
                 {{ duty.content[n - 1]}}
               </v-card-text>
+              <v-card-actions>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>

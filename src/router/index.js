@@ -7,6 +7,11 @@ import SignIn from '../views/signin'
 import Faq from '../views/faq'
 import Admin from '../views/admin'
 import AdminDuty from '../views/dashboard/duty'
+import Health from '../views/dashboard/health'
+import Sanitation from '../views/dashboard/sanitation'
+import VisitorRecord from '../views/dashboard/record'
+import Security from '../views/dashboard/security'
+import Feedback from '../views/dashboard/feedback'
 
 Vue.use(VueRouter)
 
@@ -40,7 +45,32 @@ const routes = [
     path: `/dashboard/duty`,
     name: 'DashboardDuty',
     component: AdminDuty,
-  }
+  },
+  {
+    path: '/dashboard/health',
+    name: 'DashboardHealth',
+    component: Health,
+  },
+  {
+    path: '/dashboard/sanitation',
+    name: 'DashboardSanitation',
+    component: Sanitation,
+  },
+  {
+    path: '/dashboard/record',
+    name: 'VisitorRecord',
+    component: VisitorRecord,
+  },
+  {
+    path: '/dashboard/security',
+    name: 'DashboardSecurity',
+    component: Security,
+  },
+  {
+    path: '/dashboard/feedback',
+    name: 'DashboardFeedback',
+    component: Feedback,
+  },
 ]
 
 const router = new VueRouter({
