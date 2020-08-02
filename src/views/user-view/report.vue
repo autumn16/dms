@@ -95,11 +95,10 @@
                         dark
                         tile
                         style="margin-left: 50px; font-size: 12px;"
-                        @click.stop="deleteRow()"                       
+                        @click.stop="deleteRow(item.name)"
                       >
                        Delete messages
-                      </v-btn>
-                      
+                      </v-btn>                      
                         <v-dialog v-model="displayMess" width="600">
                         <v-card>
                           <v-card-title 
@@ -151,6 +150,7 @@ export default {
       expanded: [],
       singleExpand: false,
       drawer: true,
+      index:0,
       username:"Hien",
       timestamp:"",
       items: [
@@ -170,27 +170,27 @@ export default {
         {
           title: "Security",
           icon: "mdi-security",
-          link: "dashboard/security",
+          link: "security",
         },
         {
           title: "Student's Health",
           icon: "mdi-cards-heart",
-          link: "dashboard/health",
+          link: "health",
         },
         {
           title: "Student's Feedback",
           icon: "mdi-chat",
-          link: "dashboard/feedback",
+          link: "feedback",
         },
         {
           title: "Sanitation (COVID-19)",
           icon: "mdi-hand-water",
-          link: "dashboard/sanitation",
+          link: "sanitation",
         },
         {
           title: "Visitor Record",
           icon: "mdi-clover",
-          link: "dashboard/record",
+          link: "record",
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
       ],
@@ -309,15 +309,18 @@ export default {
         : undefined;
     },
   },
-  deleteRow()
-  {
-    this.table_rows.splice();
-  },
+  
   created() {
     setInterval(this.getNow, 1000);
     this.getNow();
   },
   methods: {
+    deleteRow(index)    
+  {    
+              
+        this.users.splice(index,1);
+      
+  },
     createNewDuty() {
       this.duty.name[this.dutyNumber] = this.dutyName;
       this.duty.content[this.dutyNumber] = this.dutyContent;
