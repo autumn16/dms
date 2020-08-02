@@ -24,7 +24,7 @@
 <!-- 
                  <v-list-item-title>Admin</v-list-item-title>
                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
-    
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h2>
                 </v-list-item-content>
               </v-list-item>
 
@@ -48,8 +48,15 @@
         </v-col>
       </v-row>
       <v-content>
-        <v-row align="center">
+        <v-row>
+          <v-col md="3"></v-col>
           <v-col md="auto">
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
+          </v-col>
+        </v-row>
+
+        <v-row align="center">
+          <v-col md="lg">     
             <v-card style="margin-left: 150px; margin-right: -140px;" light>
               <v-card-title>
               Message history  
@@ -77,39 +84,51 @@
                         color="primary" 
                         dark
                         tile
-                        style="margin-left: 50px; font-size: 12px;"
-                        @click.stop="sendNoti = true"
+                        style="margin-left: 25px; font-size: 12px;"
+                        @click.stop="displayMess = true"
                       >
-                        Send Notification
+                        Open messages
                       </v-btn>
-                      <v-dialog v-model="sendNoti" width="600">
+
+                       <v-btn
+                        color="primary" 
+                        dark
+                        tile
+                        style="margin-left: 50px; font-size: 12px;"
+                        @click.stop="deleteRow()"                       
+                      >
+                       Delete messages
+                      </v-btn>
+                      
+                        <v-dialog v-model="displayMess" width="600">
                         <v-card>
                           <v-card-title 
                             class="headline"
                           >
-                            Your Notification
+                          <h2>{{item.name}}</h2>
                           </v-card-title>
-                          <v-textarea
+                          <v-card-text
                             outlined
                             style="margin-left: 10px; margin-right: 10px;"
-                            :value="`${informText}`"
-                          >
+                            :value="`${item.MessageContent}`"                               
+                          >                    
+                          {{item.MessageContent}}  
 
-                          </v-textarea>
-                          <v-checkbox
-                            style="margin-left: 10px; margin-top: -20px;"
-                            :label="`Inform ${item.name} to his/her late payment`"
-                            @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
-                          >
-                          </v-checkbox>
+                          </v-card-text>
                           <v-card-actions>
+                          <v-btn color="green darken-1" text @click="displayMess = true">
+                              Reply
+                          </v-btn>    
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNoti = false">
-                              Send
+                        
+                            <v-btn color="green darken-1" text @click="displayMess = false">
+                              Close
                             </v-btn>
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
+        
+
                   </td>
                 </template>
               </v-data-table>
@@ -128,9 +147,12 @@ export default {
       informText: "",
       informLate: false,
       sendNoti: false,
+      displayMess:false,
       expanded: [],
       singleExpand: false,
       drawer: true,
+      username:"Hien",
+      timestamp:"",
       items: [
         {
           username:"test"
@@ -184,13 +206,13 @@ export default {
           value: "dormUID",
         },
         { text: "Title", value: "name" },
-        { text: "Content", value: "citizenID" },
+        { text: "Content", value: "MessageContent" },
        ],
       users: [
         {
           dormUID: "12-31-2020",
           name: "Quan Thanh Tho",
-          citizenID: 6.0,
+          MessageContent: 6.0,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -200,7 +222,7 @@ export default {
         {
           dormUID: "1811299",
           name: "Bui Hoang Thang",
-          citizenID: 9.0,
+          MessageContent: "*** YOU'RE LATE FOR PAYMENadadadadadT ***",
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -210,7 +232,7 @@ export default {
         {
           dormUID: "1811270",
           name: "Nguyen An Khuong",
-          citizenID: 16.0,
+          MessageContent: 16.0,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -220,7 +242,7 @@ export default {
         {
           dormUID: "1811271",
           name: "Le Dinh Duy",
-          citizenID: 3.7,
+          MessageContent: 3.7,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -230,7 +252,7 @@ export default {
         {
           dormUID: "1811272",
           name: "Luu Minh Tri",
-          citizenID: 16.0,
+          MessageContent: 16.0,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -240,7 +262,7 @@ export default {
         {
           dormUID: "1811273",
           name: "Nguyen Luan",
-          citizenID: 0.0,
+          MessageContent: 0.0,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -250,7 +272,7 @@ export default {
         {
           dormUID: "1811274",
           name: "Tran Nhu Buu",
-          citizenID: 0.2,
+          MessageContent: 0.2,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -260,7 +282,7 @@ export default {
         {
           dormUID: "1811275",
           name: "Pham Tho Quoc Long",
-          citizenID: 3.2,
+          MessageContent: 3.2,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -270,7 +292,7 @@ export default {
         {
           dormUID: "1811276",
           name: "Huynh Bach Khoa",
-          citizenID: 25.0,
+          MessageContent: 25.0,
           room: "1120AH1",
           email: "tri.luuminh@hcmut.edu.vn",
           phone: "0929347800",
@@ -287,8 +309,38 @@ export default {
         : undefined;
     },
   },
+  deleteRow()
+  {
+    this.table_rows.splice();
+  },
+  created() {
+    setInterval(this.getNow, 1000);
+    this.getNow();
+  },
+  methods: {
+    createNewDuty() {
+      this.duty.name[this.dutyNumber] = this.dutyName;
+      this.duty.content[this.dutyNumber] = this.dutyContent;
+      this.dutyNumber += 1;
+    },
+    getNow() {
+      const today = new Date();
+      const date =
+        today.getDate() +
+        "/" +
+        (today.getMonth() + 1) +
+        "/" +
+        today.getFullYear();
+      const time = (today.getHours()<10?'0'+today.getHours():today.getHours())+ ":" + 
+                (today.getMinutes()<10?'0'+today.getMinutes():today.getMinutes())
+         + ":" + (today.getSeconds()<10?'0'+today.getSeconds():today.getSeconds());
+      const dateTime = date + " " + time;
+      this.timestamp = dateTime;
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 .adminimage {
