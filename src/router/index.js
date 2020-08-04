@@ -8,12 +8,15 @@ import Faq from '../views/faq'
 import Admin from '../views/admin'
 import AdminDuty from '../views/dashboard/duty'
 
-import UserView from '../views/user-view/report'
+import report from '../views/user-view/report'
+import UpdateInfo from '../views/user-view/updateInfo'
+
 import Health from '../views/dashboard/health'
 import Sanitation from '../views/dashboard/sanitation'
 import VisitorRecord from '../views/dashboard/record'
 import Security from '../views/dashboard/security'
 import Feedback from '../views/dashboard/feedback'
+
 
 Vue.use(VueRouter)
 
@@ -76,8 +79,13 @@ const routes = [
   {
     path: `/user-view/report`,
     name: 'user-report',
-    component: UserView,
+    component: report,
   },
+  {
+    path: `/user-view/updateInfo`,
+    name:'updateInfo',
+    component:UpdateInfo,
+  }
 ]
 
 const router = new VueRouter({

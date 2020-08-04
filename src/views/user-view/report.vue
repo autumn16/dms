@@ -104,7 +104,7 @@
                           <v-card-title 
                             class="headline"
                           >
-                          <h2>{{item.name}}</h2>
+                          {{item.name}}
                           </v-card-title>
                           <v-card-text
                             outlined
@@ -112,8 +112,8 @@
                             :value="`${item.MessageContent}`"                               
                           >                    
                           {{item.MessageContent}}  
-
                           </v-card-text>
+
                           <v-card-actions>
                           <v-btn color="green darken-1" text @click="displayMess = true">
                               Reply
@@ -315,17 +315,16 @@ export default {
     this.getNow();
   },
   methods: {
+ 
     deleteRow(index)    
-  {    
-              
-        this.users.splice(index,1);
-      
+  {       
+        var i;  
+        for( i = 0; i < this.users.length; i += 1) {
+        if(this.users[i].name === index)   break;          
+        }        
+        this.users.splice(i,1);      
   },
-    createNewDuty() {
-      this.duty.name[this.dutyNumber] = this.dutyName;
-      this.duty.content[this.dutyNumber] = this.dutyContent;
-      this.dutyNumber += 1;
-    },
+
     getNow() {
       const today = new Date();
       const date =
