@@ -163,7 +163,7 @@ export default {
   },
 
   method: {
-    signUp: async function () {
+    signUp() {
       this.$refs.form.validate();
     },
   },

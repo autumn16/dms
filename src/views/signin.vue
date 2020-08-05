@@ -61,6 +61,8 @@
 <script>
 export default {
   data: () => ({
+    valid: false,
+    show1: false,
     username: "",
     password: "",
   }),

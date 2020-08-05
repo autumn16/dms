@@ -125,6 +125,9 @@
 </template>
 
 <script>
+
+const axios = require('axios')
+
 export default {
   data() {
     return {
@@ -191,7 +194,10 @@ export default {
         { text: "Student ID", value: "studentID" },
         { text: "University", value: "uni" },
       ],
+      userLength: 0,
+      userList: [],
       users: [
+        /*
         {
           dormUID: "1811298",
           name: "Quan Thanh Tho",
@@ -202,86 +208,7 @@ export default {
           studentID: 24,
           uni: "University of Law",
         },
-        {
-          dormUID: "1811299",
-          name: "Bui Hoang Thang",
-          citizenID: 9.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 37,
-          uni: "University of Economics",
-        },
-        {
-          dormUID: "1811270",
-          name: "Nguyen An Khuong",
-          citizenID: 16.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 23,
-          uni: "University of Science",
-        },
-        {
-          dormUID: "1811271",
-          name: "Le Dinh Duy",
-          citizenID: 3.7,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 67,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811272",
-          name: "Luu Minh Tri",
-          citizenID: 16.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 49,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811273",
-          name: "Nguyen Luan",
-          citizenID: 0.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 94,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811274",
-          name: "Tran Nhu Buu",
-          citizenID: 0.2,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 98,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811275",
-          name: "Pham Tho Quoc Long",
-          citizenID: 3.2,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 87,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811276",
-          name: "Huynh Bach Khoa",
-          citizenID: 25.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 51,
-          uni: "Bach Khoa University",
-        },
+        */
       ],
     };
   },
@@ -291,6 +218,27 @@ export default {
         ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         : undefined;
     },
+  },
+  created() {
+    this.getStudentInfo()
+
+  },
+  methods: {
+    getStudentInfo(){
+      axios.get('url')
+      .then(Response => {
+        this.userList = Response.data // tu parse theo json format cua ong
+        this.userLength = this.usersList.length
+      })    
+      for(let i = 0; i < this.userLength; ++i){
+        this.users[i].name = this.userList[i].name
+        this.users[i].citizenID = this.userList[i].citizenID
+        this.users[i].room = this.userList[i].room
+        this.users[i].email = this.userList[i].email
+        this.users[i].phone = this.userList[i].phone
+        this.users[i].studentID = this.userList[i].studentID
+      }
+    }  
   },
 };
 </script>
