@@ -165,15 +165,11 @@ export default {
           icon: "mdi-view-dashboard",
           link: "dashboard",
         },
+   
         {
-          title: "Duty",
-          icon: "mdi-hours-24",
-          link: "dashboard/duty",
-        },
-        {
-          title: "Security",
-          icon: "mdi-security",
-          link: "security",
+          title: "Update info",
+          icon: "mdi-information",
+          link: "../updateInfo",
         },
         {
           title: "Student's Health",

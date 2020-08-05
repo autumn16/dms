@@ -1,7 +1,7 @@
 <template>
   <div class="adminimage">
     <v-container
-        style="height: 100vh; max-height: 100%;"
+      fill-height
     >
       <v-row>
         <v-col md="auto">
@@ -65,9 +65,7 @@
               Update your exact information here. You will be responsible for what you provide us.
                 <v-spacer></v-spacer>
                 
-            </v-card-title>
-        
-
+            </v-card-title>       
                         <v-form
                                 ref="form"
                                 v-model="valid"
@@ -81,10 +79,10 @@
             v-model="t_name"
           ></v-text-field>
         </v-col>
-
         <v-col cols="24" sm="12" md="6">
             Your name in database is:  {{name}}
         </v-col>
+
      <v-col cols="12" sm="6" md="6px">
           <v-text-field
            v-model="t_address"
@@ -104,6 +102,7 @@
         <v-col cols="24" sm="12" md="6">
             Your current symptoms:  {{currentDisease}}
         </v-col>
+
          <v-col cols="12" sm="6" md="6px">
           <v-text-field
           v-model="t_citizenID"
@@ -113,8 +112,28 @@
         <v-col cols="24" sm="12" md="6">
             Your current citizenID:  {{citizenID}}
         </v-col>
-      </v-row>
 
+     <v-col cols="12" sm="6" md="6px">
+          <v-text-field
+          v-model="t_studentID"
+            label="Current studentID"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="24" sm="12" md="6">
+            Your current student ID:  {{studentID}}
+        </v-col>
+
+    <v-col cols="12" sm="6" md="6px">
+          <v-text-field
+          v-model="t_email"
+            label="Current email"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="24" sm="12" md="6">
+            Your current email:  {{email}}
+        </v-col>
+      
+        </v-row>
      <v-dialog v-model="displayMess" persistent max-width="600">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -129,7 +148,7 @@
       </template>
       <v-card>
         <v-card-title class="headline">Update Info</v-card-title>
-        <v-card-text>Your info has been updated.</v-card-text>
+        <v-card-text>{{mdi-checkbox-marked-circle}}Your info has been updated.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>          
           <v-btn  text @click="displayMess = false">Close</v-btn>
@@ -161,6 +180,8 @@ export default {
       t_currentDisease:"",
       citizendID:'',
       t_citizenID:"",
+      
+
       displayMess:false,
       expanded: [],
       singleExpand: false,
@@ -177,15 +198,11 @@ export default {
           icon: "mdi-view-dashboard",
           link: "dashboard",
         },
+        
         {
-          title: "Duty",
-          icon: "mdi-hours-24",
-          link: "dashboard/duty",
-        },
-        {
-          title: "Security",
-          icon: "mdi-security",
-          link: "security",
+          title: "Update info",
+          icon: "mdi-information",
+          link: "../updateInfo",
         },
         {
           title: "Student's Health",
@@ -291,6 +308,10 @@ export default {
 .v-btn{
   width: 360px;
   background-color: hsl(227, 58%, 65%);
+}
+
+.v-col{
+  height: 75%;
 }
 
 .v-card-title{

@@ -66,7 +66,9 @@ methods: {
     let password = this.password;
     if(username==="admin" && password==="admin"){
         this.$router.replace("/dashboard");
-    } else {
+    } else if(username==="hien" && password==="123456")
+            {this.$router.replace("/user-view/report")}
+    else{
         alert("Wrong username or password!");
     }
   }
