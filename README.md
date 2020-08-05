@@ -1,5 +1,5 @@
 ## GIỚI THIỆU PHẦN MỀM
-Trong thời đại công nghệ thông tin nơi mà mọi thứ đều được số hóa. việc số hóa giúp cho người sử dụng dễ dàng và thuận lợi hơn trong việc tương tác, tìm kiếm các chức năng mình mong muốn, chính vì lợi ích to lớn đó nên chúng em quyết định xây dựng 'Phần mềm Quản lý Ký túc xá' (Dormitory Management Service _ DMS) để giúp sinh viên ở tại Ký túc xá và Ban quản lý Ký túc xá dễ dàng tương tác - trao đổi với nhau hơn 🎉\
+Trong thời đại công nghệ thông tin nơi mà mọi thứ đều được số hóa. Việc số hóa giúp cho người sử dụng dễ dàng và thuận lợi hơn trong việc tương tác, tìm kiếm các chức năng mình mong muốn. Chính vì lợi ích to lớn đó nên chúng em quyết định xây dựng 'Phần mềm Quản lý Ký túc xá' (Dormitory Management Service _ DMS) để giúp sinh viên ở tại Ký túc xá và Ban quản lý Ký túc xá dễ dàng tương tác - trao đổi với nhau hơn 🎉\
 Phần mềm này là thành quả của nhóm CLMCA chúng em, bao gồm các thành viên:
 - Bùi Tấn Danh (1811661) 
 - Lê Đình Duy (1810861)
