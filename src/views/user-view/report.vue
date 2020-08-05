@@ -100,7 +100,7 @@
                        Delete messages
                       </v-btn>                      
                         <v-dialog v-model="displayMess" width="600">
-                        <v-card>
+                         <v-card>
                           <v-card-title 
                             class="headline"
                           >

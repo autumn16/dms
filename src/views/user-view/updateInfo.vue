@@ -51,7 +51,7 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}. UPDATE INFO</h2>
           </v-col>
         </v-row>
 
@@ -75,6 +75,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-text-field
             label="Name"
+            v-model="t_name"
           ></v-text-field>
         </v-col>
 
@@ -83,6 +84,7 @@
         </v-col>
      <v-col cols="12" sm="6" md="6px">
           <v-text-field
+           v-model="t_address"
             label="Address"
           ></v-text-field>
         </v-col>
@@ -92,6 +94,7 @@
 
         <v-col cols="12" sm="6" md="6px">
           <v-text-field
+           v-model="t_currentDisease"
             label="Current symptoms"
           ></v-text-field>
         </v-col>
@@ -100,7 +103,8 @@
         </v-col>
          <v-col cols="12" sm="6" md="6px">
           <v-text-field
-            label="Current symptoms"
+          v-model="t_citizenID"
+            label="Current citizenID"
           ></v-text-field>
         </v-col>
         <v-col cols="24" sm="12" md="6">
@@ -108,20 +112,30 @@
         </v-col>
       </v-row>
 
-    <td :colspan="headers.length">
-                <v-btn
-                      color="primary" 
-                      dark
-                      tile
-                      style="margin-left: 10px; font-size: 12px;"
-                      @click.stop="displayMess = true"
-                >Update
-                </v-btn>
-         </td>
-
+     <v-dialog v-model="displayMess" persistent max-width="600">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+          @click="updateInfo()"
+        >
+          Update
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title class="headline">Update Info</v-card-title>
+        <v-card-text>Your info has been updated.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>          
+          <v-btn  text @click="displayMess = false">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
                          
-                        </v-form>
+  </v-form>
              
             </v-card>
           </v-col>
@@ -137,9 +151,13 @@ export default {
   data() {
     return {
       name:"hien",
+      t_name:"",
       address: 'hi!',
+      t_address:"",
       currentDisease:'', 
+      t_currentDisease:"",
       citizendID:'',
+      t_citizenID:"",
       displayMess:false,
       expanded: [],
       singleExpand: false,
@@ -220,13 +238,12 @@ export default {
   },
   methods: {
  
-    deleteRow(index)    
-  {       
-        var i;  
-        for( i = 0; i < this.users.length; i += 1) {
-        if(this.users[i].name === index)   break;          
-        }        
-        this.users.splice(i,1);      
+    updateInfo()    
+  {
+      this.name=this.t_name;
+      this.address=this.t_address;
+      this.currentDisease=this.t_currentDisease;
+      this.citizenID=this.t_citizenID;
   },
 
     getNow() {
@@ -298,6 +315,7 @@ export default {
   position: relative;
   left: 40px;
 }
+
 
 .myPageName{
     opacity: 100%;
