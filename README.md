@@ -9,6 +9,7 @@ $ npm install
 ```
 5. Thẻ style của từng layout phải được để tầm vực là **scoped** để tránh conflict.
 6. Các site dùng để tham khảo bao gồm [https://vuetifyjs.com/](https://vuetifyjs.com/)  [https://cli.vuejs.org/guide/](https://cli.vuejs.org/guide/)
+7. Server của admin được deploy tại địa chỉ http://admin-database.herokuapp.com/ với các route là duty, health, security, sanitation, visitor-record, các phương thức tương ứng là getAll (GET) và addNew + tên route tương ứng (POST) 
 
 ## CHẠY THỬ VÀ GỠ LỖI
 1. Chạy thử
