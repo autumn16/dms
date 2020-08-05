@@ -1,6 +1,8 @@
 <template>
   <div class="adminimage">
-    <v-container>
+    <v-container         
+        style="height: 100vh; max-height: 100%;"
+    >
       <v-row>
         <v-col md="auto">
           <v-navigation-drawer
@@ -25,6 +27,7 @@
                  <v-list-item-title>Admin</v-list-item-title>
                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
             <h2 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h2>
+            <h5 style="color: white; text-shadow: 1px 1px 20px red;">{{ timestamp }}</h5>
                 </v-list-item-content>
               </v-list-item>
 
@@ -51,7 +54,7 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}</h2>
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;">NOTIFICATION AND MESSAGES FROM ADMIN</h2>
           </v-col>
         </v-row>
 
@@ -186,11 +189,6 @@ export default {
           title: "Sanitation (COVID-19)",
           icon: "mdi-hand-water",
           link: "sanitation",
-        },
-        {
-          title: "Visitor Record",
-          icon: "mdi-clover",
-          link: "record",
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
       ],
@@ -347,7 +345,10 @@ export default {
 <style scoped>
 .adminimage {
   background-image: url("../../assets/signup_img.jpg");
-  height: 100%;
+  height:auto  ;
   
 }
+
+
+
 </style>

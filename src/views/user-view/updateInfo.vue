@@ -1,6 +1,8 @@
 <template>
   <div class="adminimage">
-    <v-container>
+    <v-container
+        style="height: 100vh; max-height: 100%;"
+    >
       <v-row>
         <v-col md="auto">
           <v-navigation-drawer
@@ -25,6 +27,7 @@
                  <v-list-item-title>Admin</v-list-item-title>
                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
             <h2 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h2>
+            <h5 style="color: white; text-shadow: 1px 1px 12px red;"> {{ timestamp   }}</h5>
                 </v-list-item-content>
               </v-list-item>
 
@@ -51,7 +54,7 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;">It's {{ timestamp }}. UPDATE INFO</h2>
+            <h2 style="color: white; text-shadow: 1px 1px 20px red;"> UPDATE YOUR INFORMATION</h2>
           </v-col>
         </v-row>
 
@@ -59,7 +62,7 @@
           <v-col md="lg">     
             <v-card style="margin-left: 150px; margin-right: -140px;" light>
               <v-card-title>
-              Update your exact info here. You will be responsible for what you provide us.
+              Update your exact information here. You will be responsible for what you provide us.
                 <v-spacer></v-spacer>
                 
             </v-card-title>
@@ -199,11 +202,7 @@ export default {
           icon: "mdi-hand-water",
           link: "sanitation",
         },
-        {
-          title: "Visitor Record",
-          icon: "mdi-clover",
-          link: "record",
-        },
+      
         { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
       ],
       permanent: true,
@@ -268,8 +267,6 @@ export default {
 <style scoped>
 .adminimage {
   background-image: url("../../assets/signup_img.jpg");
-  height: absolute;
-  bottom:0px;
 }
 
 
@@ -321,7 +318,16 @@ export default {
     opacity: 100%;
     left: 50px;
     top: 10px;   
-    position: absolute;
+    /*position: absolute;
+}
+#background {
+  /*ackground-image: url("../assets/signup_img.jpg");*/
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 </style>
 
