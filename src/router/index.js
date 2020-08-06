@@ -77,12 +77,12 @@ const routes = [
     component: Feedback,
   },
   {
-    path: `/user-view/report`,
+    path: `/user-view/1810913/report`,
     name: 'user-report',
     component: report,
   },
   {
-    path: `/user-view/updateInfo`,
+    path: `/user-view/1810913/updateInfo`,
     name:'updateInfo',
     component:UpdateInfo,
   }

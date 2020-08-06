@@ -155,6 +155,7 @@ export default {
       drawer: true,
       index:0,
       username:"Hien",
+      id:"1810913",
       timestamp:"",
       items: [
         {
@@ -169,7 +170,7 @@ export default {
         {
           title: "Update info",
           icon: "mdi-information",
-          link: "../updateInfo",
+          link: `../1810913/updateInfo`,
         },
         {
           title: "Student's Health",
