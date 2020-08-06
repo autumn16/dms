@@ -102,7 +102,7 @@
                     class="white--text"
                     color="primary"
                     :disabled="!valid"
-                    @click="signUp"
+                    @click="register"
                   >Continue</v-btn>
 
                   <div class="termOfUse">
@@ -123,6 +123,8 @@
 </template>
 
 <script>
+const axios = require('axios')
+
 export default {
   data() {
     return {
@@ -137,7 +139,7 @@ export default {
       studentID: "",
       university: "",
       citizenID: "",
-
+      numberOfStudent: 0,
       usernameRules: [
         (v) => !!v || "User is required",
         (v) => (v && v.length <= 25) || "Name must be less than 25 characters",
@@ -161,10 +163,45 @@ export default {
       citizenIDRules: [(v) => !!v || "Citizen ID is required"],
     };
   },
-
-  method: {
-    signUp() {
+  created() {
+    this.getNumber()
+  },
+  methods: {
+    getNumber() { 
+      axios.get('http://admin-database.herokuapp.com/student/getAll')
+      .then(Response => {
+        this.numberOfStudent = Response.data.length
+        console.log(this.numberOfStudent)
+      })
+    },
+    register() {
+      console.log('CLICK SUCCESSFULLY')
       this.$refs.form.validate();
+      let config = {
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }
+      let data = {
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        name: this.fullName,
+        studentId: this.studentID,
+        university: this.university,
+        citizenId: this.citizenID,
+      }
+      axios.post('http://admin-database.herokuapp.com/student/addNewStudent', data, config)
+      .then(Response => Response.data[this.numberOfStudent + 1])
+      .then(({username, password, email, name, studentId, university, citizenId}) => {
+        this.username = username
+        this.password = password
+        this.email = email
+        this.fullName = name
+        this.studentID = studentId
+        this.citizenID = citizenId
+        this.university = university
+      })
     },
   },
 };

@@ -234,6 +234,7 @@ export default {
             name: this.userList[i].name,
             citizenId: this.userList[i].citizenId,
             email: this.userList[i].email,
+            room: 'WAITING',
             studentId: this.userList[i].studentId,
             university: this.userList[i].university
           })
@@ -246,7 +247,6 @@ export default {
 
 <style scoped>
 #background {
-  /*ackground-image: url("../assets/signup_img.jpg");*/
   background: #0F2027; 
   background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
   background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
