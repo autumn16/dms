@@ -65,18 +65,44 @@ export default {
     show1: false,
     username: "",
     password: "",
+    datalist:[
+        { username:"hien",
+          password:"123456",
+          id:"1810913",
+        },
+        { username:"hung",
+          password:"654321",
+          id:"1810923",
+        },
+    ]
   }),
+  
+ 
   methods: {
     checkSigningIn() {
       let username = this.username;
       let password = this.password;
+      var check=false;
       if (username === "admin" && password === "admin") {
         this.$router.replace("/dashboard");
-      } else {
-        alert("Wrong username or password!");
-      }
+    } else{  var temp=this.searchConfirm(username,password);
+              if(temp===undefined){
+                  alert("Wrong username or password!");                  
+                  check=true;
+              }
+              if(temp&&!check){                                            
+                this.$router.replace(`/user-view/${temp}/report`)
+              } 
+          }
     },
+      searchConfirm(username,inputPass){        
+      var exam=this.datalist.find(datalist=>datalist.username===username);    
+      if (exam.password===inputPass)      
+          return exam.id;
+      return undefined
   },
+  },
+  
 };
 </script>
 
