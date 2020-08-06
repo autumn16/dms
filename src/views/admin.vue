@@ -6,16 +6,13 @@
         <v-col md="auto">
           <v-navigation-drawer
             v-model="drawer"
-            :color="color"
-            :expand-on-hover="expandOnHover"
-            :mini-variant="miniVariant"
             :permanent="permanent"
             :src="bg"
             absolute
             dark
           >
             <v-list dense nav class="py-0">
-              <v-list-item two-line :class="miniVariant && 'px-0'">
+              <v-list-item two-line>
                 <v-list-item-avatar>
                   <img src="../assets/signup_img.jpg" />
                 </v-list-item-avatar>
@@ -187,26 +184,28 @@ export default {
           value: "dormUID",
         },
         { text: "Name", value: "name" },
-        { text: "Citizen ID", value: "citizenID" },
+        { text: "Citizen ID", value: "citizenId" },
         { text: "Room", value: "room" },
         { text: "Email", value: "email" },
-        { text: "Phone Number", value: "phone" },
-        { text: "Student ID", value: "studentID" },
-        { text: "University", value: "uni" },
+        // { text: "Phone Number", value: "phone" },
+        { text: "Student ID", value: "studentId" },
+        { text: "University", value: "university" },
       ],
       userLength: 0,
       userList: [],
+
+      test: [123],
       users: [
         /*
         {
-          dormUID: "1811298",
-          name: "Quan Thanh Tho",
-          citizenID: 6.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 24,
-          uni: "University of Law",
+          dormUID: "",
+          name: "",
+          citizenId: "",
+          room: "",
+          email: "",
+          phone: "",
+          studentId: "",
+          university: "",
         },
         */
       ],
@@ -221,23 +220,25 @@ export default {
   },
   created() {
     this.getStudentInfo()
-
   },
   methods: {
     getStudentInfo(){
-      axios.get('url')
+      axios.get('http://admin-database.herokuapp.com/student/getAll')
       .then(Response => {
-        this.userList = Response.data // tu parse theo json format cua ong
-        this.userLength = this.usersList.length
-      })    
-      for(let i = 0; i < this.userLength; ++i){
-        this.users[i].name = this.userList[i].name
-        this.users[i].citizenID = this.userList[i].citizenID
-        this.users[i].room = this.userList[i].room
-        this.users[i].email = this.userList[i].email
-        this.users[i].phone = this.userList[i].phone
-        this.users[i].studentID = this.userList[i].studentID
-      }
+        this.userList = Response.data 
+        this.userLength = this.userList.length
+        console.log(this.userLength)
+        console.log(this)
+        for(let i = 0; i < this.userLength; i++){
+          this.users.push({
+            name: this.userList[i].name,
+            citizenId: this.userList[i].citizenId,
+            email: this.userList[i].email,
+            studentId: this.userList[i].studentId,
+            university: this.userList[i].university
+          })
+        }
+      }) 
     }  
   },
 };
