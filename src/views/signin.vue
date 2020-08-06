@@ -84,7 +84,6 @@ export default {
       if (username === "admin" && password === "admin") {
         this.$router.replace("/dashboard");
     } else{  var temp=this.searchConfirm(username,password);
-              alert(`${temp}`);
               if(temp===undefined){
                   alert("Wrong username or password!");                  
                   check=true;
