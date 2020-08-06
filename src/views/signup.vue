@@ -102,9 +102,8 @@
                     class="white--text"
                     color="primary"
                     :disabled="!valid"
-                    @click="register"
+                    @click="register, isCompleted = true"
                   >Continue</v-btn>
-
                   <div class="termOfUse">
                     <p>
                       By continuing, you have agreed to DMS's
@@ -117,17 +116,33 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-dialog v-model="isCompleted" width="400px" height="200px">
+          <v-card width="800px" height="200px">
+            <v-card-title style="font-size: 30px;"> Register successfully</v-card-title>
+            <v-card-subtitle style="font-size: 20px; margin-top: 2px;"> Press continue to sign in</v-card-subtitle>
+            <v-card-actions>
+              <v-btn
+                style="width: 90%; margin-left: 18px;"
+                color="primary"
+                to="/sign-in"
+              >
+                CONTINUE
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-content>
     </v-app>
   </div>
 </template>
 
 <script>
-const axios = require('axios')
+const axios = require("axios");
 
 export default {
   data() {
     return {
+      isCompleted: false,
       valid: true,
       show1: false,
       show2: false,
@@ -164,24 +179,25 @@ export default {
     };
   },
   created() {
-    this.getNumber()
+    this.getNumber();
   },
   methods: {
-    getNumber() { 
-      axios.get('http://admin-database.herokuapp.com/student/getAll')
-      .then(Response => {
-        this.numberOfStudent = Response.data.length
-        console.log(this.numberOfStudent)
-      })
+    getNumber() {
+      axios
+        .get("http://admin-database.herokuapp.com/student/getAll")
+        .then((Response) => {
+          this.numberOfStudent = Response.data.length;
+          console.log(this.numberOfStudent);
+        });
     },
     register() {
-      console.log('CLICK SUCCESSFULLY')
+      console.log("CLICK SUCCESSFULLY");
       this.$refs.form.validate();
       let config = {
         headers: {
-          'Content-Type':'application/json'
-        }
-      }
+          "Content-Type": "application/json",
+        },
+      };
       let data = {
         username: this.username,
         password: this.password,
@@ -190,18 +206,33 @@ export default {
         studentId: this.studentID,
         university: this.university,
         citizenId: this.citizenID,
-      }
-      axios.post('http://admin-database.herokuapp.com/student/addNewStudent', data, config)
-      .then(Response => Response.data[this.numberOfStudent + 1])
-      .then(({username, password, email, name, studentId, university, citizenId}) => {
-        this.username = username
-        this.password = password
-        this.email = email
-        this.fullName = name
-        this.studentID = studentId
-        this.citizenID = citizenId
-        this.university = university
-      })
+      };
+      axios
+        .post(
+          "http://admin-database.herokuapp.com/student/addNewStudent",
+          data,
+          config
+        )
+        .then((Response) => Response.data[this.numberOfStudent + 1])
+        .then(
+          ({
+            username,
+            password,
+            email,
+            name,
+            studentId,
+            university,
+            citizenId,
+          }) => {
+            this.username = username;
+            this.password = password;
+            this.email = email;
+            this.fullName = name;
+            this.studentID = studentId;
+            this.citizenID = citizenId;
+            this.university = university;
+          }
+        );
     },
   },
 };
@@ -234,12 +265,10 @@ export default {
   background-color: hsl(227, 58%, 65%);
 }
 
-
 .v-card {
   position: flex;
   width: 440px;
   height: 44rem;
 }
-
 </style>
 
