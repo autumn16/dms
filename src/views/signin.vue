@@ -88,7 +88,7 @@ export default {
                   alert("Wrong username or password!");                  
                   check=true;
               }
-              if(temp&&!check){                                            
+              if(temp&&!check){     
                 this.$router.replace(`/user-view/${temp}/report`)
               } 
           }

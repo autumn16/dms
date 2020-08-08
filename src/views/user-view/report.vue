@@ -54,7 +54,7 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;">NOTIFICATION AND MESSAGES FROM ADMIN</h2>
+            <h1 style="color: white; text-shadow: 1px 1px 20px red;">NOTIFICATION AND MESSAGES FROM ADMIN</h1>
           </v-col>
         </v-row>
 
@@ -170,12 +170,12 @@ export default {
         {
           title: "Update info",
           icon: "mdi-information",
-          link: `../1810913/updateInfo`,
+          link: `updateInfo`,
         },
         {
-          title: "Student's Health",
-          icon: "mdi-cards-heart",
-          link: "health",
+          title: "Messages and notifications",
+          icon: "mdi-folder-open",
+          link: "report",
         },
         {
           title: "Student's Feedback",
@@ -187,7 +187,7 @@ export default {
           icon: "mdi-hand-water",
           link: "sanitation",
         },
-        { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
+        { title: "Logout", icon: "mdi-logout-variant", link: "../../../signin" },
       ],
       permanent: true,
       background: false,

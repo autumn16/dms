@@ -23,9 +23,6 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-<!-- 
-                 <v-list-item-title>Admin</v-list-item-title>
-                 <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
             <h2 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h2>
             <h5 style="color: white; text-shadow: 1px 1px 12px red;"> {{ timestamp   }}</h5>
                 </v-list-item-content>
@@ -54,7 +51,7 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <h1 style="color: white; text-shadow: 1px 1px 20px red;"> UPDATE YOUR INFORMATION</h1>
+            <h1 style="color: white; text-shadow: 1px 1px 20px red;"> FEEDBACK</h1>
           </v-col>
         </v-row>
 
@@ -62,7 +59,7 @@
           <v-col md="lg">     
             <v-card style="margin-left: 150px; margin-right: -140px;" light>
               <v-card-title>
-              Update your exact information here. You will be responsible for what you provide us.
+          Tell us how you feel here and report the problems you may meet and what we can do to improve.
                 <v-spacer></v-spacer>
                 
             </v-card-title>       
@@ -73,69 +70,31 @@
                         >
                         <v-row>
 
-        <v-col cols="12" sm="6" md="6">
-          <v-text-field
-            label="Name"
+        <v-col cols="12" sm="6" md="12">
+          <v-textarea
+            label="Title"
+            outlined
             v-model="t_name"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your name in database is:  {{name}}
+          ></v-textarea>
         </v-col>
 
-     <v-col cols="12" sm="6" md="6px">
-          <v-text-field
+     <v-col cols="12" sm="6" md="12">
+          <v-textarea
            v-model="t_address"
-            label="Address"
-          ></v-text-field>
+           outlined
+            label="Problem"
+          ></v-textarea>
         </v-col>
-        <v-col cols="24" sm="12" md="6">
-             Your current address: {{address}}
-        </v-col>
+ 
 
-        <v-col cols="12" sm="6" md="6px" >
-          <v-text-field
+        <v-col cols="12" sm="6" md="12">
+          <v-textarea
            v-model="t_currentDisease"
-           
-            label="Current symptoms"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">        
-            Your current symptoms: 
-            <div id="changestatus"> {{currentDisease}} </div> 
-        </v-col>
+            outlined
+            label="Suggestion"
+          ></v-textarea>
+        </v-col>   
 
-         <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_citizenID"
-            label="Current citizenID"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current citizenID:  {{citizenID}}
-        </v-col>
-
-     <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_studentID"
-            label="Current studentID"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current student ID:  {{studentID}}
-        </v-col>
-
-    <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_email"
-          :rules="emailRules"
-            label="Current email"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current email:  {{email}}
-        </v-col>
-      
         </v-row>
      <v-dialog v-model="displayMess" persistent max-width="600">
       <template v-slot:activator="{ on, attrs }">
@@ -144,14 +103,14 @@
           dark
           v-bind="attrs"
           v-on="on"
-          @click="updateInfo(),health()"
+          @click="updateInfo()"
         >
-          Update
+          Submit
         </v-btn>
       </template>
       <v-card>
-        <v-card-title class="headline">Update Info</v-card-title>
-        <v-card-text>Your info has been updated.</v-card-text>
+        <v-card-title class="headline">Submitted your feedback</v-card-title>
+        <v-card-text>Thanks for your feedback.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>          
           <v-btn  text @click="displayMess = false">Close</v-btn>
@@ -170,31 +129,21 @@
   </div>
 </template>
 
-<script >
+<script>
 
 export default {
   data() {
     return {
-      name:"",
+      name:"hien",
       t_name:"",
-      address: '',
+      address: 'hi!',
       t_address:"",
       currentDisease:'', 
       t_currentDisease:"",
       citizendID:'',
       t_citizenID:"",
-      studentID:"",
-      t_studentID:"",
-      email:"",
-      t_email:"",
       
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
 
-
-      HP:"",
       displayMess:false,
       expanded: [],
       singleExpand: false,
@@ -203,6 +152,9 @@ export default {
       username:"Hien",
       timestamp:"",
       items: [
+        {
+          username:"test"
+        },
         {
           title: "Dashboard",
           icon: "mdi-view-dashboard",
@@ -251,46 +203,25 @@ export default {
     };
   },
   computed: {
-    bg() {      
+    bg() {
       return this.background
         ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         : undefined;
-    } 
+    },
   },
-  mounted(){
-      this.$axios
-        .get('http://admin-database.herokuapp.com/student/getAll')
-        .then(response=>( this.name=response.data[0].username,
-                          this.email=response.data[0].email
-                          )
-              );        
-   },
-
+  
   created() {
     setInterval(this.getNow, 1000);
     this.getNow();
   },
   methods: {
-    health(){
-      if (this.t_currentDisease=="healthy") 
-        document.getElementById("changestatus").style.color = '#99C262'
-      else
-        document.getElementById("changestatus").style.color = '#ff0000';     
-    },
+ 
     updateInfo()    
-  {      
+  {
       this.name=this.t_name;
       this.address=this.t_address;
       this.currentDisease=this.t_currentDisease;
       this.citizenID=this.t_citizenID;
-      this.studentID=this.t_studentID;
-      this.email=this.t_email;
-
-      this.HP=
-      {"username":"dasdasda","password":"111111111111","email":this.email,"name":this.email,"studentId":this.studentID,"citizenId":this.citizendID,"symptoms":this.currentDisease}
-      this.$axios
-        .post('http://admin-database.herokuapp.com/student/getAll',this.data.HP);
-      
   },
 
     getNow() {
@@ -349,8 +280,8 @@ export default {
   text-align: center;
 }
 
-.v-text-field{
-  width: 360px;
+.v-textarea{
+  width: 800px;
 }
 
 .v-row{
