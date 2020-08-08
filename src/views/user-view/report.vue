@@ -139,12 +139,17 @@ export default {
         {
           title: "Update Infomation",
           icon: "mdi-information",
-          link: `../1810913/updateInfo`,
+          link: `./updateInfo`,
         },
         {
           title: "Update Health",
           icon: "mdi-cards-heart",
           link: "./health",
+        },
+        {
+          title: "Send Feedback",
+          icon: "mdi-message-outline",
+          link: "./feedback"
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
       ],

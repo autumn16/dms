@@ -1,29 +1,20 @@
 <template>
   <div class="adminimage">
     <v-content>
-      <v-row justify="center" style="background-color: black;">
-        <v-col md="4" >
-          <v-btn to="../dashboard" style="margin-left: 50px;">
+      <v-row justify="start" style="background-color: black;">
+        <v-col md="auto" style="margin-left: 50px;">
+          <v-btn to="./report">
             <v-icon style="margin-bottom: 3px;"> mdi-keyboard-backspace </v-icon>
-            RETURN TO DASHBOARD 
-          </v-btn>      
-        </v-col>
-        <v-col md="4" style="display: flex; justify-content: center; align-items: center;">
-          <v-btn @click="rep = !rep">
-            SEND FEEDBACK
+            RETURN TO DASHBOARD
           </v-btn>
         </v-col>
-        <v-col md="4">
-
-        </v-col>
       </v-row>
-      <v-row align="center" justify="center">
-        <v-col md="auto" sm="auto" v-if="rep">
+      <v-row align="center" justify="center" style="margin-top: 100px;">
+        <v-col md="auto" sm="auto">
           <h1
             style="color: white; text-shadow: 1px 1px 20px black; text-align: center;"
-          >SEND REPLY</h1>
-          <v-text-field outlined label="Citizen ID" v-model="citizenId" style="width: 500px;" dark></v-text-field>
-          <v-text-field outlined label="Title" v-model="name" style="width: 500px; margin-top: -20px;" dark></v-text-field>
+          >SEND YOUR FEEDBACK</h1>
+          <v-text-field outlined label="Title" v-model="name" style="width: 500px;" dark></v-text-field>
           <v-textarea
             outlined
             label="Detail"
@@ -36,23 +27,19 @@
         <v-col md="auto">
           <h1
             style="color: white; text-shadow: 1px 1px 20px black; text-align: center;"
-          >LIST OF STUDENT FEEDBACK</h1>
+          >ADMIN REPLY</h1>
           <v-data-table
             :headers="headers"
             :items="health"
             item-key="name"
-            style="width: 1000px;"
           >
             <template v-slot:expanded-item="{ headers }">
               <td :colspan="headers.length">
-        
+                
               </td>
             </template>
           </v-data-table>
         </v-col>
-      </v-row>
-      <v-row align="center" justify="center">
-        
       </v-row>
     </v-content>
   </div>
@@ -65,9 +52,7 @@ export default {
   data() {
     return {
       // adminHealth: 0,
-      rep: false,
       numberOfFeedback: 0,
-      citizenId: '',
       name: '',
       detail: '',
       username: '',
@@ -87,7 +72,11 @@ export default {
     };
   },
   computed: {
-
+    bg() {
+      return this.background
+        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+        : undefined;
+    },
   },
 
   created() {
@@ -97,7 +86,7 @@ export default {
 
   methods: {
     getNumber(){
-      axios.get('http://admin-database.herokuapp.com/feedback/students/admin')
+      axios.get('http://admin-database.herokuapp.com/feedback/students/' + this.id )
       .then(Response => {
         this.numberOfFeedback = Response.data.length
         console.log(this.numberOfFeedback)
@@ -123,7 +112,15 @@ export default {
         name: this.name,
         detail: this.detail,
       };
-      axios.post('http://admin-database.herokuapp.com/feedback/students/' + this.citizenId, data, config)
+      /*
+      axios.post('http://admin-database.herokuapp.com/feedback/students/' + this.id, data, config)
+      .then((Response) => Response.data[this.numberOfFeedback + 1])
+      .then(({ name, detail}) => {
+        this.name = name
+        this.detail = detail
+      })
+      */
+      axios.post('http://admin-database.herokuapp.com/feedback/students/admin', data, config)
       .then((Response) => Response.data[this.numberOfFeedback + 1])
       .then(({ name, detail}) => {
         this.name = name

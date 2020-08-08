@@ -1,6 +1,6 @@
 <template>
   <div class="adminimage">
-    <v-main>
+    <v-content>
       <v-row justify="start" style="background-color: black;">
         <v-col md="auto" style="margin-left: 50px;">
           <v-btn to="./report">
@@ -9,7 +9,7 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center" class="fill-height">
+      <v-row align="center" justify="center" style="margin-top: 100px;">
         <v-col md="auto" sm="auto">
           <h1
             style="color: white; text-shadow: 1px 1px 20px black; text-align: center;"
@@ -41,7 +41,7 @@
           </v-data-table>
         </v-col>
       </v-row>
-    </v-main>
+    </v-content>
   </div>
 </template>
 

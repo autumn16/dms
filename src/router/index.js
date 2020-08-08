@@ -11,6 +11,7 @@ import AdminDuty from '../views/dashboard/duty'
 import report from '../views/user-view/report'
 import UpdateInfo from '../views/user-view/updateInfo'
 import UHealth from '../views/user-view/health'
+import UFeedback from '../views/user-view/feedback'
 
 import Health from '../views/dashboard/health'
 import Sanitation from '../views/dashboard/sanitation'
@@ -91,6 +92,11 @@ const routes = [
     path: `/user-view/health`,
     name:'uhealth',
     component: UHealth,
+  },
+  {
+    path: `/user-view/feedback`,
+    name: 'ufeedback',
+    component: UFeedback,
   }
 ]
 
