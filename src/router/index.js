@@ -10,6 +10,7 @@ import AdminDuty from '../views/dashboard/duty'
 
 import report from '../views/user-view/report'
 import UpdateInfo from '../views/user-view/updateInfo'
+import UHealth from '../views/user-view/health'
 
 import Health from '../views/dashboard/health'
 import Sanitation from '../views/dashboard/sanitation'
@@ -85,6 +86,11 @@ const routes = [
     path: `/user-view/updateInfo`,
     name:'updateInfo',
     component:UpdateInfo,
+  },
+  {
+    path: `/user-view/health`,
+    name:'uhealth',
+    component: UHealth,
   }
 ]
 

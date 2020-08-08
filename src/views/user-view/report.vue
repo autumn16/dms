@@ -144,7 +144,7 @@ export default {
         {
           title: "Update Health",
           icon: "mdi-cards-heart",
-          link: "health",
+          link: "./health",
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
       ],
