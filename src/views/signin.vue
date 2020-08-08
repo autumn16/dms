@@ -65,6 +65,8 @@ export default {
   data: () => ({
     cmp_username: [],
     cmp_password: [],
+    name: [],
+    citizenId: [],
     numberOfStudent: 0,
     valid: false,
     show1: false,
@@ -82,6 +84,8 @@ export default {
         for(let i = 0; i < this.numberOfStudent; i++){
           this.cmp_username[i] = Response.data[i].username
           this.cmp_password[i] = Response.data[i].password
+          this.name[i] = Response.data[i].name
+          this.citizenId[i] = Response.data[i].citizenId
           /*
           console.log(this.cmp_username[i])
           console.log(this.cmp_password[i])
@@ -102,11 +106,15 @@ export default {
         for(let i = 0; i < this.numberOfStudent; i++){
           if(username === this.cmp_username[i] && password === this.cmp_password[i]){
             check = true
-            alert('LOGIN SUCCESSFULLY, CLICK OK TO GO TO USER HOMEPAGE')
+            alert('Login successfully, click OK to continue')
             this.$router.replace("/user-view/report")
+            this.$store.state.gloUsername = this.name[i]
+            this.$store.state.gloUserId = this.citizenId[i]
+            // this.$store.setUserInfo(this.name[i], this.citizenId[i])
+            // this.updateStatusAction(this.citizendId[i], this.citizenId[i])
           }
         }
-        if(check == false) alert('WRONG USERNAME OR PASSWORD')
+        if(check == false) alert('Wrong username or password, please try again')
       }
     },
   },
