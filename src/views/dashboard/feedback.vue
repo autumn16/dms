@@ -10,7 +10,7 @@
         </v-col>
         <v-col md="4" style="display: flex; justify-content: center; align-items: center;">
           <v-btn @click="rep = !rep">
-            SEND FEEDBACK
+            SEND REPLY
           </v-btn>
         </v-col>
         <v-col md="4">

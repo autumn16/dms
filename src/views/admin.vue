@@ -92,12 +92,14 @@
                             outlined
                             style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
                             label="Citizen Id"
+                            v-model="citizenId"
                           >
                           </v-text-field>
                           <v-text-field
                             outlined
                             style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
                             label="Title"
+                            v-model="name"
                           >    
                           </v-text-field>
                           <v-textarea
@@ -105,6 +107,7 @@
                             style="margin-left: 10px; margin-right: 10px;"
                             label="Detail"
                             :value="`${informText}`"
+                            v-model="detail"
                           >
 
                           </v-textarea>
@@ -117,7 +120,7 @@
                           </v-checkbox>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNoti = false">
+                            <v-btn color="green darken-1" text @click="sendNotification">
                               Send
                             </v-btn>
                           </v-card-actions>
@@ -141,6 +144,9 @@ const axios = require('axios')
 export default {
   data() {
     return {
+      citizenId: '',
+      name: '',
+      detail: '',
       informText: "",
       informLate: false,
       sendNoti: false,
@@ -206,8 +212,6 @@ export default {
       ],
       userLength: 0,
       userList: [],
-
-      test: [123],
       users: [
         /*
         {
@@ -235,6 +239,23 @@ export default {
     this.getStudentInfo()
   },
   methods: {
+    sendNotification() {
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let data = {
+        name: this.name,
+        detail: this.detail
+      };
+      axios.post('http://admin-database.herokuapp.com/notification/students/' + this.citizenId, data, config)
+      .then(({ name, detail }) => {
+        this.name = name
+        this.detail = detail
+      })
+      this.sendNoti = false
+    },
     getStudentInfo(){
       axios.get('http://admin-database.herokuapp.com/student/getAll')
       .then(Response => {
