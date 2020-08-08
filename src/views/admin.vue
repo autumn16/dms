@@ -88,9 +88,22 @@
                           >
                             Your Notification
                           </v-card-title>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Citizen Id"
+                          >
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Title"
+                          >    
+                          </v-text-field>
                           <v-textarea
                             outlined
                             style="margin-left: 10px; margin-right: 10px;"
+                            label="Detail"
                             :value="`${informText}`"
                           >
 
