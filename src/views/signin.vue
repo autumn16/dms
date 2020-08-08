@@ -59,46 +59,56 @@
 </template>
 
 <script>
+const axios = require('axios')
+
 export default {
   data: () => ({
+    cmp_username: [],
+    cmp_password: [],
+    numberOfStudent: 0,
+    valid: false,
+    show1: false,
     username: "",
     password: "",
-    datalist:[
-        { username:"hien",
-          password:"123456",
-          id:"1810913",
-        },
-        { username:"hung",
-          password:"654321",
-          id:"1810923",
-        },
-    ]
   }),
-  
- 
-  methods: {
-    checkSigningIn() {
-      let username = this.username;
-      let password = this.password;
-      var check=false;
-      if (username === "admin" && password === "admin") {
-        this.$router.replace("/dashboard");
-    } else{  var temp=this.searchConfirm(username,password);
-              if(temp===undefined){
-                  alert("Wrong username or password!");                  
-                  check=true;
-              }
-              if(temp&&!check){                                            
-                this.$router.replace(`/user-view/${temp}/report`)
-              } 
-          }
-    },
-      searchConfirm(username,inputPass){        
-      var exam=this.datalist.find(datalist=>datalist.username===username);    
-      if (exam.password===inputPass)      
-          return exam.id;
-      return undefined
+  created(){
+    this.getInfo()
   },
+  methods: {
+    getInfo() {
+      axios.get('http://admin-database.herokuapp.com/student/getAll')
+      .then(Response => {
+        this.numberOfStudent = Response.data.length
+        for(let i = 0; i < this.numberOfStudent; i++){
+          this.cmp_username[i] = Response.data[i].username
+          this.cmp_password[i] = Response.data[i].password
+          /*
+          console.log(this.cmp_username[i])
+          console.log(this.cmp_password[i])
+          */
+        } 
+        // console.log(this.numberOfStudent)
+      })
+    },
+    checkSigningIn() {
+      let username = this.username
+      let password = this.password
+      let check = false
+      if (username === "admin" && password === "admin") {
+        check == true
+        this.$router.replace("/dashboard")
+      } 
+      else { 
+        for(let i = 0; i < this.numberOfStudent; i++){
+          if(username === this.cmp_username[i] && password === this.cmp_password[i]){
+            check = true
+            alert('LOGIN SUCCESSFULLY, CLICK OK TO GO TO USER HOMEPAGE')
+            this.$router.replace("/user-view/report")
+          }
+        }
+        if(check == false) alert('WRONG USERNAME OR PASSWORD')
+      }
+    },
   },
   
 };

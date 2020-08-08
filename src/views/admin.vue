@@ -6,16 +6,13 @@
         <v-col md="auto">
           <v-navigation-drawer
             v-model="drawer"
-            :color="color"
-            :expand-on-hover="expandOnHover"
-            :mini-variant="miniVariant"
             :permanent="permanent"
             :src="bg"
             absolute
             dark
           >
             <v-list dense nav class="py-0">
-              <v-list-item two-line :class="miniVariant && 'px-0'">
+              <v-list-item two-line>
                 <v-list-item-avatar>
                   <img src="../assets/signup_img.jpg" />
                 </v-list-item-avatar>
@@ -125,6 +122,9 @@
 </template>
 
 <script>
+
+const axios = require('axios')
+
 export default {
   data() {
     return {
@@ -184,104 +184,30 @@ export default {
           value: "dormUID",
         },
         { text: "Name", value: "name" },
-        { text: "Citizen ID", value: "citizenID" },
+        { text: "Citizen ID", value: "citizenId" },
         { text: "Room", value: "room" },
         { text: "Email", value: "email" },
-        { text: "Phone Number", value: "phone" },
-        { text: "Student ID", value: "studentID" },
-        { text: "University", value: "uni" },
+        // { text: "Phone Number", value: "phone" },
+        { text: "Student ID", value: "studentId" },
+        { text: "University", value: "university" },
       ],
+      userLength: 0,
+      userList: [],
+
+      test: [123],
       users: [
+        /*
         {
-          dormUID: "1811298",
-          name: "Quan Thanh Tho",
-          citizenID: 6.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 24,
-          uni: "University of Law",
+          dormUID: "",
+          name: "",
+          citizenId: "",
+          room: "",
+          email: "",
+          phone: "",
+          studentId: "",
+          university: "",
         },
-        {
-          dormUID: "1811299",
-          name: "Bui Hoang Thang",
-          citizenID: 9.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 37,
-          uni: "University of Economics",
-        },
-        {
-          dormUID: "1811270",
-          name: "Nguyen An Khuong",
-          citizenID: 16.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 23,
-          uni: "University of Science",
-        },
-        {
-          dormUID: "1811271",
-          name: "Le Dinh Duy",
-          citizenID: 3.7,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 67,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811272",
-          name: "Luu Minh Tri",
-          citizenID: 16.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 49,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811273",
-          name: "Nguyen Luan",
-          citizenID: 0.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 94,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811274",
-          name: "Tran Nhu Buu",
-          citizenID: 0.2,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 98,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811275",
-          name: "Pham Tho Quoc Long",
-          citizenID: 3.2,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 87,
-          uni: "Bach Khoa University",
-        },
-        {
-          dormUID: "1811276",
-          name: "Huynh Bach Khoa",
-          citizenID: 25.0,
-          room: "1120AH1",
-          email: "tri.luuminh@hcmut.edu.vn",
-          phone: "0929347800",
-          studentID: 51,
-          uni: "Bach Khoa University",
-        },
+        */
       ],
     };
   },
@@ -292,12 +218,35 @@ export default {
         : undefined;
     },
   },
+  created() {
+    this.getStudentInfo()
+  },
+  methods: {
+    getStudentInfo(){
+      axios.get('http://admin-database.herokuapp.com/student/getAll')
+      .then(Response => {
+        this.userList = Response.data 
+        this.userLength = this.userList.length
+        console.log(this.userLength)
+        console.log(this)
+        for(let i = 0; i < this.userLength; i++){
+          this.users.push({
+            name: this.userList[i].name,
+            citizenId: this.userList[i].citizenId,
+            email: this.userList[i].email,
+            room: 'WAITING',
+            studentId: this.userList[i].studentId,
+            university: this.userList[i].university
+          })
+        }
+      }) 
+    }  
+  },
 };
 </script>
 
 <style scoped>
 #background {
-  /*ackground-image: url("../assets/signup_img.jpg");*/
   background: #0F2027; 
   background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
   background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
