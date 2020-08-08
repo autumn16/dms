@@ -14,11 +14,11 @@
           <h1
             style="color: white; text-shadow: 1px 1px 20px black; text-align: center;"
           >UPDATE YOUR PERSONAL INFORMATION </h1>
-          <v-text-field outlined label="Room" v-model="name" style="margin-bottom: -20px" dark></v-text-field>
-          <v-text-field outlined label="Email" v-model="name" style="margin-bottom: -20px"  dark></v-text-field>
-          <v-text-field outlined label="Student ID" v-model="name" style="margin-bottom: -20px"  dark></v-text-field>
-          <v-text-field outlined label="University" v-model="name" dark></v-text-field>
-          <v-btn style="margin-top: -20px; width: 100%;" color="primary" @click="sendHealth">UPDATE</v-btn>
+          <v-text-field outlined label="Room" v-model="room" style="margin-bottom: -20px" dark></v-text-field>
+          <v-text-field outlined label="Email" v-model="email" style="margin-bottom: -20px"  dark></v-text-field>
+          <v-text-field outlined label="Student ID" v-model="studentId" style="margin-bottom: -20px"  dark></v-text-field>
+          <v-text-field outlined label="University" v-model="university" dark></v-text-field>
+          <v-btn style="margin-top: -20px; width: 100%;" color="primary" @click="updateInfo">UPDATE</v-btn>
         </v-col>
       </v-row>
     </v-content>
@@ -33,10 +33,11 @@ export default {
     return {
       adminHealth: 0,
       numberOfHealth: 0,
-      name: '',
-      detail: '',
-      username: '',
+      room: '',
+      email: '',
+      studentId: '',
       id: '',
+      university: '',
       headers: [
         { text: "Title", value: "title", sortable: false },
         { text: "Detail", value: "detail", sortable: false },
@@ -65,6 +66,29 @@ export default {
   },
 
   methods: {
+    
+    updateInfo(){
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let data = {
+        room: this.room,
+        studentId: this.studentId,
+        email: this.email,
+        university: this.university,
+      };
+      axios.put('http://admin-database.herokuapp.com/student/updateInformation/' + this.id, data, config)
+      .then((Response) => Response.data)
+      .then(({ room, email, studentId, university}) => {
+        this.room = room
+        this.studentId = studentId
+        this.email = email
+        this.university = university
+      })
+      alert('Information updated')
+    },
     getNumber(){
       axios.get('http://admin-database.herokuapp.com/student-health/health/students/admin')
       .then(Response => {
@@ -73,7 +97,6 @@ export default {
       axios.get('http://admin-database.herokuapp.com/student-health/health/students/' + this.id )
       .then(Response => {
         this.numberOfHealth = Response.data.length
-        console.log(this.numberOfHealth)
         for(let i = 0; i < this.numberOfHealth; i++){
           this.health.push({
             title: Response.data[i].name,

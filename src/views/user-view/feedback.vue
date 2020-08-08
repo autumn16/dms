@@ -112,14 +112,6 @@ export default {
         name: this.name,
         detail: this.detail,
       };
-      /*
-      axios.post('http://admin-database.herokuapp.com/feedback/students/' + this.id, data, config)
-      .then((Response) => Response.data[this.numberOfFeedback + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-      */
       axios.post('http://admin-database.herokuapp.com/feedback/students/admin', data, config)
       .then((Response) => Response.data[this.numberOfFeedback + 1])
       .then(({ name, detail}) => {
