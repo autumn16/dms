@@ -4,16 +4,12 @@
     <v-app>
       <v-navigation-drawer
         v-model="drawer"
-        :color="color"
-        :expand-on-hover="expandOnHover"
-        :mini-variant="miniVariant"
-        :permanent="permanent"
         :src="bg"
         absolute
         dark
       >
         <v-list dense nav class="py-0">
-          <v-list-item two-line :class="miniVariant && 'px-0'">
+          <v-list-item two-line >
             <v-list-item-avatar>
               <img src="../../assets/signup_img.jpg" />
             </v-list-item-avatar>
@@ -56,24 +52,24 @@
             </v-btn>
             <v-dialog v-model="addNewDuty" width="600px">
               <v-card>
-                <v-card-title>Health case</v-card-title>
+                <v-card-title>Add new case</v-card-title>
                 <v-form>
                   <v-text-field
                     v-model="dutyName"
-                    placeholder="Case Name"
+                    placeholder="Case name"
                     outlined
                     style="margin-left: 20px; margin-right: 20px;"
                   ></v-text-field>
                   <v-textarea
                     v-model="dutyContent"
-                    placeholder="Detail"
+                    placeholder="Case content"
                     outlined
                     style="margin-left: 20px; margin-right: 20px; margin-top: -15px;"
                   ></v-textarea>
                 </v-form>
                 <v-spacer></v-spacer>
                 <v-card-actions style="margin-left: 10px; margin-top: -30px; margin-bottom: 20px;">
-                  <v-btn color="green darken-1" text @click="createNewDuty()">Add health case</v-btn>
+                  <v-btn color="green darken-1" text @click="add">Add Case</v-btn>
                   <v-btn color="red darken-1" text @click="addNewDuty = false">Exit</v-btn>
                 </v-card-actions>
               </v-card>
@@ -83,17 +79,20 @@
         <v-row>
           <v-col md="3"></v-col>
           <v-col md="auto">
-            <v-card
-              :key="n"
-              v-for="n in dutyNumber"
-              width="800"
-              height="300"
-              style="margin-bottom: 10px;"
-            >
-              <v-card-title style="color: blue; font-size: 30px;">{{ duty.name[n - 1]}}</v-card-title>
-              <v-card-text style="color: black; font-size: 18px;">{{ duty.content[n - 1]}}</v-card-text>
-              <v-card-actions></v-card-actions>
-            </v-card>
+          <v-card 
+            :key="index"
+            v-for="index in numberOfDuty"
+            width="800"
+            height="300"
+            style="margin-bottom: 10px;"
+          >
+            <v-card-title style="color: blue; font-size: 30px;">
+              {{ dName[index - 1]}}
+            </v-card-title>
+            <v-card-text style="color: black; font-size: 18px;">
+              {{ dDetail[index - 1]}}
+            </v-card-text>
+          </v-card>
           </v-col>
         </v-row>
       </v-content>
@@ -102,21 +101,19 @@
 </template>
 
 <script>
+const axios = require('axios')
 export default {
   data() {
     return {
-      cardTitle: "INFORMATION ABOUT NATIONAL CONFERENCE",
+      obj: [],
+      numberOfDuty: 0,
       dutyName: "",
       dutyContent: "",
-      duty: {
-        name: [],
-        content: [],
-      },
+      dName: [],
+      dDetail: [],
       dutyNumber: 0,
       addNewDuty: false,
       timestamp: "",
-      expanded: [],
-      singleExpand: false,
       drawer: true,
       items: [
         {
@@ -156,8 +153,6 @@ export default {
         },
         { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
       ],
-      permanent: true,
-      background: false,
     };
   },
   computed: {
@@ -170,27 +165,59 @@ export default {
   created() {
     setInterval(this.getNow, 1000);
     this.getNow();
+    this.getRecord();
   },
+
   methods: {
-    createNewDuty() {
-      this.duty.name[this.dutyNumber] = this.dutyName;
-      this.duty.content[this.dutyNumber] = this.dutyContent;
-      this.dutyNumber += 1;
-    },
     getNow() {
+      
       const today = new Date();
+
       const date =
         today.getDate() +
         "/" +
         (today.getMonth() + 1) +
         "/" +
         today.getFullYear();
+
       const time = (today.getHours()<10?'0'+today.getHours():today.getHours())+ ":" + 
                 (today.getMinutes()<10?'0'+today.getMinutes():today.getMinutes())
          + ":" + (today.getSeconds()<10?'0'+today.getSeconds():today.getSeconds());
+
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
+    getRecord() {
+      console.log(" *** CLCMA LANDED HERE ***")
+      axios.get('http://admin-database.herokuapp.com/health/getAll')
+      .then(Response => {
+        this.obj = Response.data
+        this.numberOfDuty = this.obj.length
+        for(let i = 0; i < this.numberOfDuty; i++){
+          this.dName.unshift(this.obj[i].name)
+          this.dDetail.unshift(this.obj[i].detail)
+        }
+      })
+    },
+    add() {
+      let config = {
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }
+      let data = {
+        name: this.dutyName,
+        detail: this.dutyContent,
+      }
+      axios.post('http://admin-database.herokuapp.com/health/addNewHealth/user/id', data, config)
+      .then(Response => Response.data[this.numberOfDuty + 1])
+      .then(({ name, detail }) => {
+        this.dutyName = name
+        this.dutyContent = detail
+      })
+      this.dName.unshift(this.dutyName)
+      this.dDetail.unshift(this.dutyContent) 
+    }
   },
 };
 </script>

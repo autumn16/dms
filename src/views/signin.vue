@@ -59,46 +59,66 @@
 </template>
 
 <script>
+const axios = require('axios')
+
 export default {
   data: () => ({
+    cmp_username: [],
+    cmp_password: [],
+    ID:'',
+    name: [],
+    citizenId: [],
+    numberOfStudent: 0,
+    valid: false,
+    show1: false,
     username: "",
     password: "",
-    datalist:[
-        { username:"hien",
-          password:"123456",
-          id:"1810913",
-        },
-        { username:"hung",
-          password:"654321",
-          id:"1810923",
-        },
-    ]
   }),
-  
- 
-  methods: {
-    checkSigningIn() {
-      let username = this.username;
-      let password = this.password;
-      var check=false;
-      if (username === "admin" && password === "admin") {
-        this.$router.replace("/dashboard");
-    } else{  var temp=this.searchConfirm(username,password);
-              if(temp===undefined){
-                  alert("Wrong username or password!");                  
-                  check=true;
-              }
-              if(temp&&!check){     
-                this.$router.replace(`/user-view/${temp}/report`)
-              } 
-          }
-    },
-      searchConfirm(username,inputPass){        
-      var exam=this.datalist.find(datalist=>datalist.username===username);    
-      if (exam.password===inputPass)      
-          return exam.id;
-      return undefined
+  created(){
+    this.getInfo()
   },
+  methods: {
+    getInfo() {
+      axios.get('http://admin-database.herokuapp.com/student/getAll')
+      .then(Response => {
+        this.numberOfStudent = Response.data.length
+        for(let i = 0; i < this.numberOfStudent; i++){
+          this.cmp_username[i] = Response.data[i].username
+          this.cmp_password[i] = Response.data[i].password
+          this.name[i] = Response.data[i].name
+          this.citizenId[i] = Response.data[i].citizenId
+          this.ID=Response.data[i].studentId
+          /*
+          console.log(this.cmp_username[i])
+          console.log(this.cmp_password[i])
+          */
+        } 
+          
+      })
+    },
+    checkSigningIn() {
+      let username = this.username
+      let password = this.password
+      let check = false
+      if (username === "admin" && password === "admin") {
+        check == true
+        this.$router.replace("/dashboard")
+      } 
+      else { 
+        for(let i = 0; i < this.numberOfStudent; i++){
+          if(username === this.cmp_username[i] && password === this.cmp_password[i]){
+            check = true
+            alert('Login successfully, click OK to continue')
+            this.$router.replace(`/user-view/report`)
+            this.$store.state.gloUsername = this.name[i]
+            this.$store.state.gloUserId = this.citizenId[i]
+            // this.$store.setUserInfo(this.name[i], this.citizenId[i])
+            // this.updateStatusAction(this.citizendId[i], this.citizenId[i])
+          }
+        }
+        if(check == false) alert('Wrong username or password, please try again')
+      }
+    },
   },
   
 };

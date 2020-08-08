@@ -1,4 +1,12 @@
-
+## GIỚI THIỆU PHẦN MỀM
+Trong thời đại công nghệ thông tin nơi mà mọi thứ đều được số hóa. Việc số hóa giúp cho người sử dụng dễ dàng và thuận lợi hơn trong việc tương tác, tìm kiếm các chức năng mình mong muốn. Chính vì lợi ích to lớn đó nên chúng em quyết định xây dựng 'Phần mềm Quản lý Ký túc xá' (Dormitory Management System _ DMS) để giúp sinh viên ở tại Ký túc xá và Ban quản lý Ký túc xá dễ dàng tương tác - trao đổi với nhau hơn 🎉\
+Phần mềm này là thành quả của nhóm CLMCA chúng em, bao gồm các thành viên:
+- Bùi Tấn Danh (1811661) 
+- Lê Đình Duy (1810861)
+- Nguyễn Thanh Hiên (1810913)
+- Nguyễn Hữu Hưng (1812496)
+- Lưu Minh Trí (1811298)
+ 
 ## CÁC LƯU Ý QUAN TRỌNG
 1. Phiên bản VueJS đang được sử dụng là **VueJS 3**.
 2. Không sử dụng **Bootstrap** mà sử dụng **Built-in Vuetify Component** để tránh conflict.
@@ -9,6 +17,7 @@ $ npm install
 ```
 5. Thẻ style của từng layout phải được để tầm vực là **scoped** để tránh conflict.
 6. Các site dùng để tham khảo bao gồm [https://vuetifyjs.com/](https://vuetifyjs.com/)  [https://cli.vuejs.org/guide/](https://cli.vuejs.org/guide/)
+7. API được dùng để thao tác với database là DMS API do nhóm CLMCA tự phát triển, chi tiết về DMS API nằm ở địa chỉ https://github.com/autumn16/dms-api 
 
 ## CHẠY THỬ VÀ GỠ LỖI
 1. Chạy thử
