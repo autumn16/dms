@@ -1,243 +1,54 @@
 <template>
   <div class="adminimage">
-    <v-container
-      fill-height
-    >
-      <v-row>
-        <v-col md="auto">
-          <v-navigation-drawer
-            v-model="drawer"
-            :color="color"
-            :expand-on-hover="expandOnHover"
-            :mini-variant="miniVariant"
-            :permanent="permanent"
-            :src="bg"
-            absolute
-            dark
-          >
-        
-             <v-list dense nav class="py-0">
-              <v-list-item two-line :class="miniVariant && 'px-0'">
-                <v-list-item-avatar>
-                  <img src="../../assets/signup_img.jpg" />
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-<!-- 
-                 <v-list-item-title>Admin</v-list-item-title>
-                 <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle> UserName here-->
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h2>
-            <h5 style="color: white; text-shadow: 1px 1px 12px red;"> {{ timestamp   }}</h5>
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-divider></v-divider>
-
-              <!--<v-list-item link>-->
-
-              <v-list-item v-for="item in items" :key="item.title" link>
-                <v-list-item-icon>
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-
-                <router-link :to="item.link">
-                  <v-list-item-content>
-                    <v-list-item-title style="color: white; text-decoration: none;">{{ item.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </router-link>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
+    <v-content>
+      <v-row justify="start" style="background-color: black;">
+        <v-col md="auto" style="margin-left: 50px;">
+          <v-btn to="./report">
+            <v-icon style="margin-bottom: 3px;"> mdi-keyboard-backspace </v-icon>
+            RETURN TO DASHBOARD
+          </v-btn>
         </v-col>
       </v-row>
-      <v-content>
-        <v-row>
-          <v-col md="3"></v-col>
-          <v-col md="auto">
-            <h2 style="color: white; text-shadow: 1px 1px 20px red;"> UPDATE YOUR INFORMATION</h2>
-          </v-col>
-        </v-row>
-
-        <v-row align="center">
-          <v-col md="lg">     
-            <v-card style="margin-left: 150px; margin-right: -140px;" light>
-              <v-card-title>
-              Update your exact information here. You will be responsible for what you provide us.
-                <v-spacer></v-spacer>
-                
-            </v-card-title>       
-                        <v-form
-                                ref="form"
-                                v-model="valid"
-                                lazy-validation
-                        >
-                        <v-row>
-
-        <v-col cols="12" sm="6" md="6">
-          <v-text-field
-            label="Name"
-            v-model="t_name"
-          ></v-text-field>
+      <v-row align="center" justify="center" style="margin-top: 100px;">
+        <v-col md="4" sm="auto">
+          <h1
+            style="color: white; text-shadow: 1px 1px 20px black; text-align: center;"
+          >UPDATE YOUR PERSONAL INFORMATION </h1>
+          <v-text-field outlined label="Room" v-model="name" style="margin-bottom: -20px" dark></v-text-field>
+          <v-text-field outlined label="Email" v-model="name" style="margin-bottom: -20px"  dark></v-text-field>
+          <v-text-field outlined label="Student ID" v-model="name" style="margin-bottom: -20px"  dark></v-text-field>
+          <v-text-field outlined label="University" v-model="name" dark></v-text-field>
+          <v-btn style="margin-top: -20px; width: 100%;" color="primary" @click="sendHealth">UPDATE</v-btn>
         </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your name in database is:  {{name}}
-        </v-col>
-
-     <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-           v-model="t_address"
-            label="Address"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-             Your current address: {{address}}
-        </v-col>
-
-        <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-           v-model="t_currentDisease"
-            label="Current symptoms"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current symptoms:  {{currentDisease}}
-        </v-col>
-
-         <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_citizenID"
-            label="Current citizenID"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current citizenID:  {{citizenID}}
-        </v-col>
-
-     <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_studentID"
-            label="Current studentID"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current student ID:  {{studentID}}
-        </v-col>
-
-    <v-col cols="12" sm="6" md="6px">
-          <v-text-field
-          v-model="t_email"
-            label="Current email"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="24" sm="12" md="6">
-            Your current email:  {{email}}
-        </v-col>
-      
-        </v-row>
-     <v-dialog v-model="displayMess" persistent max-width="600">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-          @click="updateInfo()"
-        >
-          Update
-        </v-btn>
-      </template>
-      <v-card>
-        <v-card-title class="headline">Update Info</v-card-title>
-        <v-card-text>{{mdi-checkbox-marked-circle}}Your info has been updated.</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>          
-          <v-btn  text @click="displayMess = false">Close</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-                         
-  </v-form>
-             
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-content>
-    </v-container>
+      </v-row>
+    </v-content>
   </div>
 </template>
 
 <script>
+const axios = require('axios')
 
 export default {
   data() {
     return {
-      name:"hien",
-      t_name:"",
-      address: 'hi!',
-      t_address:"",
-      currentDisease:'', 
-      t_currentDisease:"",
-      citizendID:'',
-      t_citizenID:"",
-      
-
-      displayMess:false,
-      expanded: [],
-      singleExpand: false,
-      drawer: true,
-      index:0,
-      username:"Hien",
-      timestamp:"",
-      items: [
-        {
-          username:"test"
-        },
-        {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
-          link: "dashboard",
-        },
-        
-        {
-          title: "Update info",
-          icon: "mdi-information",
-          link: "../updateInfo",
-        },
-        {
-          title: "Student's Health",
-          icon: "mdi-cards-heart",
-          link: "health",
-        },
-        {
-          title: "Student's Feedback",
-          icon: "mdi-chat",
-          link: "feedback",
-        },
-        {
-          title: "Sanitation (COVID-19)",
-          icon: "mdi-hand-water",
-          link: "sanitation",
-        },
-      
-        { title: "Logout", icon: "mdi-logout-variant", link: "../signin" },
-      ],
-      permanent: true,
-      background: false,
-
-      search: "",
+      adminHealth: 0,
+      numberOfHealth: 0,
+      name: '',
+      detail: '',
+      username: '',
+      id: '',
       headers: [
+        { text: "Title", value: "title", sortable: false },
+        { text: "Detail", value: "detail", sortable: false },
+      ],
+      health: [
+        /*
         {
-          text: "Date",
-          align: "start",
-          sortable: true,
-          value: "dormUID",
+          title: "TEST",
+          detail: "TEST",
         },
-        { text: "Title", value: "name" },
-        { text: "Content", value: "MessageContent" },
-       ],
-  
-      
+        */
+      ],
     };
   },
   computed: {
@@ -247,34 +58,67 @@ export default {
         : undefined;
     },
   },
-  
+
   created() {
-    setInterval(this.getNow, 1000);
-    this.getNow();
-  },
-  methods: {
- 
-    updateInfo()    
-  {
-      this.name=this.t_name;
-      this.address=this.t_address;
-      this.currentDisease=this.t_currentDisease;
-      this.citizenID=this.t_citizenID;
+    this.getDataFromServer();
+    this.getNumber();
   },
 
-    getNow() {
-      const today = new Date();
-      const date =
-        today.getDate() +
-        "/" +
-        (today.getMonth() + 1) +
-        "/" +
-        today.getFullYear();
-      const time = (today.getHours()<10?'0'+today.getHours():today.getHours())+ ":" + 
-                (today.getMinutes()<10?'0'+today.getMinutes():today.getMinutes())
-         + ":" + (today.getSeconds()<10?'0'+today.getSeconds():today.getSeconds());
-      const dateTime = date + " " + time;
-      this.timestamp = dateTime;
+  methods: {
+    getNumber(){
+      axios.get('http://admin-database.herokuapp.com/student-health/health/students/admin')
+      .then(Response => {
+        this.adminHealth = Response.data.length
+      })
+      axios.get('http://admin-database.herokuapp.com/student-health/health/students/' + this.id )
+      .then(Response => {
+        this.numberOfHealth = Response.data.length
+        console.log(this.numberOfHealth)
+        for(let i = 0; i < this.numberOfHealth; i++){
+          this.health.push({
+            title: Response.data[i].name,
+            detail: Response.data[i].detail
+          })
+        }
+      })
+    },
+    sendHealth(){
+      this.health.push({
+        title: this.name,
+        detail: this.detail
+      })
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let data = {
+        name: this.name,
+        detail: this.detail,
+      };
+      axios.post('http://admin-database.herokuapp.com/student-health/health/students/' + this.id, data, config)
+      .then((Response) => Response.data[this.numberOfHealth + 1])
+      .then(({ name, detail}) => {
+        this.name = name
+        this.detail = detail
+      })
+      axios.post('http://admin-database.herokuapp.com/student-health/health/students/admin', data, config)
+      .then((Response) => Response.data[this.adminHealth + 1])
+      .then(({ name, detail}) => {
+        this.name = name
+        this.detail = detail
+      })
+    },
+    getDataFromServer() {
+      /*
+      this.username = this.$store.state.gloUsername
+      this.id = this.$store.state.gloUserId
+      */
+      this.username = this.$store.state.gloUsername;
+      this.id = this.$store.state.gloUserId;
+      this.lock = true;
+      console.log(this.username);
+      console.log(this.id);
     },
   },
 };
@@ -283,66 +127,6 @@ export default {
 
 <style scoped>
 .adminimage {
-  background-image: url("../../assets/signup_img.jpg");
-}
-
-
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://fonts.googleapis.com/css2?family=Roboto');
-
-.termOfUse{
-  color: hsl(227, 58%, 65%);;
-  margin-top: 10px;
-  font-size: 10px;
-}
-
-.signUpDescription{
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  color: white;
-  margin-top: 24px;
-  font-size: 24px;
-}
-
-
-.v-btn{
-  width: 360px;
-  background-color: hsl(227, 58%, 65%);
-}
-
-.v-col{
-  height: 75%;
-}
-
-.v-card-title{
-  text-align: center;
-}
-
-.v-text-field{
-  width: 360px;
-}
-
-.v-row{
-      top: 0px;
-  position: relative;
-  left: 40px;
-}
-
-.v-form{
-  top: 0px;
-  position: relative;
-  left: 40px;
-}
-
-
-.myPageName{
-    opacity: 100%;
-    left: 50px;
-    top: 10px;   
-    /*position: absolute;
-}
-#background {
-  /*ackground-image: url("../assets/signup_img.jpg");*/
   background: #0f2027;
   background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
   background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
@@ -351,4 +135,3 @@ export default {
   height: 100%;
 }
 </style>
-

@@ -265,6 +265,7 @@ export default {
         console.log(this)
         for(let i = 0; i < this.userLength; i++){
           this.users.push({
+            dormUID: 10000 + i,
             name: this.userList[i].name,
             citizenId: this.userList[i].citizenId,
             email: this.userList[i].email,
