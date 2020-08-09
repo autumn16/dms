@@ -37,10 +37,11 @@ $ npm install
 
 1. **Các chức năng của sinh viên**
  - [x] Đăng ký tài khoản sinh viên mới 
- - [ ] Nhận và xem thông báo từ quản trị viên
- - [ ] Cập nhật thông tin cá nhân
- - [ ] Thanh toán tiền điện nước, tiền ở tại Ký túc xá
- - [ ] Gửi phản hồi cho quản trị viên
+ - [x] Nhận và xem thông báo từ quản trị viên
+ - [x] Cập nhật thông tin cá nhân
+ - [x] Thanh toán tiền điện nước, tiền ở tại Ký túc xá
+ - [x] Gửi phản hồi cho quản trị viên
+ - [x] Cập nhật thông tin sức khỏe đến cho quản trị viên
  
 2. **Các chức năng của quản trị viên**
  
@@ -49,6 +50,6 @@ $ npm install
  - [x] Cập nhật tình hình vệ sinh của Ký túc xá (COVID-19)
  - [x] Cập nhật tình hình an ninh của Ký túc xá
  - [x] Cập nhật sức khỏe của sinh viên 
- - [ ] Cập nhật thông tin của sinh viên
+ - [x] Cập nhật thông tin của sinh viên
  - [x] Gửi thông báo cho sinh viên
- - [ ] Xử lý phản hồi của sinh viên 
+ - [x] Xử lý phản hồi của sinh viên 
