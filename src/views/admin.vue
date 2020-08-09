@@ -75,12 +75,73 @@
                       <v-btn
                         color="primary" 
                         dark
-                        tile
                         style="margin-left: 50px; font-size: 12px;"
                         @click.stop="sendNoti = true"
                       >
                         Send Notification
                       </v-btn>
+                      <v-btn
+                        color="error"
+                        dark
+                        style="margin-left: 5px; font-size: 12px;"
+                        @click.stop="update = true"
+                      >
+                        Update information
+                      </v-btn>
+                      <v-dialog v-model="update" width="600">
+                        <v-card>
+                          <v-card-title 
+                            class="headline"
+                          >
+                            Update student information
+                          </v-card-title>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Citizen Id"
+                            v-model="citizenId"
+                          >
+                          
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Room"
+                            v-model="room"
+                          >
+                          
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Email"
+                            v-model="email"
+                          >
+                          
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Student ID"
+                            v-model="studentId"
+                          >
+                          
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="University"
+                            v-model="university"
+                          >
+                          
+                          </v-text-field>
+                        <v-card-actions>
+                          <v-btn text color="green" @click="updateInfo">
+                            Update Information
+                          </v-btn>
+                        </v-card-actions>
+                        </v-card>
+                        </v-dialog>
                       <v-dialog v-model="sendNoti" width="600">
                         <v-card>
                           <v-card-title 
@@ -88,10 +149,26 @@
                           >
                             Your Notification
                           </v-card-title>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Citizen Id"
+                            v-model="citizenId"
+                          >
+                          </v-text-field>
+                          <v-text-field
+                            outlined
+                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
+                            label="Title"
+                            v-model="name"
+                          >    
+                          </v-text-field>
                           <v-textarea
                             outlined
                             style="margin-left: 10px; margin-right: 10px;"
+                            label="Detail"
                             :value="`${informText}`"
+                            v-model="detail"
                           >
 
                           </v-textarea>
@@ -104,7 +181,7 @@
                           </v-checkbox>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNoti = false">
+                            <v-btn color="green darken-1" text @click="sendNotification">
                               Send
                             </v-btn>
                           </v-card-actions>
@@ -128,6 +205,14 @@ const axios = require('axios')
 export default {
   data() {
     return {
+      room: '',
+      email: '',
+      university: '',
+      studentId: '',
+      update: false,
+      citizenId: '',
+      name: '',
+      detail: '',
       informText: "",
       informLate: false,
       sendNoti: false,
@@ -193,8 +278,6 @@ export default {
       ],
       userLength: 0,
       userList: [],
-
-      test: [123],
       users: [
         /*
         {
@@ -222,6 +305,45 @@ export default {
     this.getStudentInfo()
   },
   methods: {
+    updateInfo() {
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let data = {
+        room: this.room,
+        studentId: this.studentId,
+        email: this.email,
+        university: this.university,
+      };
+      axios.put('http://admin-database.herokuapp.com/student/updateInformation/' + this.citizenId, data, config)
+      .then((Response) => Response.data)
+      .then(({ room, email, studentId, university}) => {
+        this.room = room
+        this.studentId = studentId
+        this.email = email
+        this.university = university
+      })
+      alert('Information updated')
+    },
+    sendNotification() {
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let data = {
+        name: this.name,
+        detail: this.detail
+      };
+      axios.post('http://admin-database.herokuapp.com/notification/students/' + this.citizenId, data, config)
+      .then(({ name, detail }) => {
+        this.name = name
+        this.detail = detail
+      })
+      this.sendNoti = false
+    },
     getStudentInfo(){
       axios.get('http://admin-database.herokuapp.com/student/getAll')
       .then(Response => {
@@ -231,6 +353,7 @@ export default {
         console.log(this)
         for(let i = 0; i < this.userLength; i++){
           this.users.push({
+            dormUID: 10000 + i,
             name: this.userList[i].name,
             citizenId: this.userList[i].citizenId,
             email: this.userList[i].email,

@@ -67,10 +67,7 @@
                 :headers="headers"
                 :items="users"
                 :search="search"
-                :single-expand="singleExpand"
-                :expanded.sync="expanded"
                 item-key="name"
-                show-expand
               >
                 <template v-slot:expanded-item="{ headers, item}">
                   <td :colspan="headers.length">
@@ -118,9 +115,12 @@
 </template>
 
 <script>
+const axios = require('axios')
+
 export default {
   data() {
     return {
+      messageList: [],
       lock: false,
       informText: "",
       informLate: false,
@@ -140,17 +140,18 @@ export default {
         {
           title: "Update Infomation",
           icon: "mdi-information",
-          link: `updateInfo`,
+          link: `./updateInfo`,
         },
         {
-          title: "Messages and notifications",
-          icon: "mdi-folder-open",
-          link: "report",
+          title: "Update Health",
+          icon: "mdi-cards-heart",
+          link: "./health",
         },
         {
-          title: "Student's Feedback",
-          icon: "mdi-chat",
-          link: "feedback",
+          title: "Send Feedback",
+          icon: "mdi-message-outline",
+          link: "./feedback"
+
         },
         {
           title: "Sanitation (COVID-19)",
@@ -165,14 +166,8 @@ export default {
 
       search: "",
       headers: [
-        {
-          text: "Date",
-          align: "start",
-          sortable: true,
-          value: "dormUID",
-        },
-        { text: "Title", value: "name" },
-        { text: "Content", value: "MessageContent" },
+        { text: "Title", value: "name", sortable: false, },
+        { text: "Detail", value: "detail", sortable: false, },
       ],
       users: [
 
@@ -207,6 +202,17 @@ export default {
       this.username = this.$store.state.gloUsername
       this.id = this.$store.state.gloUserId
       this.lock = true
+      axios.get('http://admin-database.herokuapp.com/notification/students/' + this.id)
+      .then(Response => {
+        this.messageList = Response.data
+        let numberOfMessage = Response.data.length
+        for(let i = 0; i < numberOfMessage; i++){
+          this.users.push({
+            name: this.messageList[i].name,
+            detail: this.messageList[i].detail
+          })
+        }
+      })
       console.log(this.username)
       console.log(this.id)
     },

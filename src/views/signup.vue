@@ -102,7 +102,7 @@
                     class="white--text"
                     color="primary"
                     :disabled="!valid"
-                    @click="register, isCompleted = true"
+                    @click="register"
                   >Continue</v-btn>
                   <div class="termOfUse">
                     <p>
@@ -116,6 +116,7 @@
             </v-card>
           </v-col>
         </v-row>
+        <!--
         <v-dialog v-model="isCompleted" width="400px" height="200px">
           <v-card width="800px" height="200px">
             <v-card-title style="font-size: 30px;"> Register successfully</v-card-title>
@@ -124,6 +125,7 @@
               <v-btn
                 style="width: 90%; margin-left: 18px;"
                 color="primary"
+                @click="register"
                 to="/sign-in"
               >
                 CONTINUE
@@ -131,6 +133,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        -->
       </v-content>
     </v-app>
   </div>
@@ -207,32 +210,20 @@ export default {
         university: this.university,
         citizenId: this.citizenID,
       };
-      axios
-        .post(
-          "http://admin-database.herokuapp.com/student/addNewStudent",
-          data,
-          config
-        )
-        .then((Response) => Response.data[this.numberOfStudent + 1])
-        .then(
-          ({
-            username,
-            password,
-            email,
-            name,
-            studentId,
-            university,
-            citizenId,
-          }) => {
-            this.username = username;
-            this.password = password;
-            this.email = email;
-            this.fullName = name;
-            this.studentID = studentId;
-            this.citizenID = citizenId;
-            this.university = university;
-          }
-        );
+      axios.post("http://admin-database.herokuapp.com/student/addNewStudent", data, config)
+      .then((Response) => Response.data[this.numberOfStudent + 1])
+      .then(({ username, password, email, name, studentId, university, citizenId }) => {
+          this.username = username;
+          this.password = password;
+          this.email = email;
+          this.fullName = name;
+          this.studentID = studentId;
+          this.citizenID = citizenId;
+          this.university = university;
+        }
+      );
+      alert("Sign up successfully, click OK to sign in")
+      this.$router.replace("/sign-in")
     },
   },
 };
