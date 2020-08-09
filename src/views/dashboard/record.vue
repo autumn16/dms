@@ -142,7 +142,7 @@ export default {
           link: "../dashboard/feedback",
         },
         {
-          title: "Sanitation (COVID-19)",
+          title: "Sanitation",
           icon: "mdi-hand-water",
           link: "../dashboard/sanitation",
         },

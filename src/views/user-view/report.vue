@@ -16,8 +16,8 @@
 
                 <v-list-item-content>
 
-                  <h5 style="color: white; text-shadow: 1px 1px 20px red;">Hi {{ username }}</h5>
-                  <h5 style="color: white; text-shadow: 1px 1px 20px red;">{{ timestamp }}</h5>
+                  <h5>{{ username }}</h5>
+                  <h5>{{ timestamp }}</h5>
                 </v-list-item-content>
               </v-list-item>
 
@@ -39,11 +39,10 @@
         </v-col>
       </v-row>
       <v-content>
-        <v-row>
-          <v-col md="2"></v-col>
+        <v-row align="center" no-gutters="" justify="center">
           <v-col md="auto">
             <h2
-              style="color: white; text-shadow: 1px 1px 20px red;"
+              style="color: white; text-shadow: 1px 1px 20px black;"
             >NOTIFICATION AND MESSAGES FROM ADMIN</h2>
           </v-col>
         </v-row>

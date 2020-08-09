@@ -9,7 +9,11 @@
           <v-col md="auto">
             <router-link id="menu" to="#">About Us</router-link>
             <router-link id="menu" to="#">News</router-link>
-            <router-link id="menu" to="./sign-in">Sign In</router-link>
+            <router-link id="menu" to="./sign-in" >
+            <v-btn outlined="" dark large="">
+              Sign In
+            </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-container>

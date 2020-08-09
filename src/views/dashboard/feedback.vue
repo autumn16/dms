@@ -31,7 +31,7 @@
             style="margin-top: -20px; width: 500px;"
             dark
           ></v-textarea>
-          <v-btn style="margin-top: -20px; width: 100%;" color="primary" @click="sendHealth">UPDATE</v-btn>
+          <v-btn style="margin-top: -20px; width: 100%;" color="primary" @click="sendHealth">SEND REPLY</v-btn>
         </v-col>
         <v-col md="auto">
           <h1
@@ -110,10 +110,6 @@ export default {
       })
     },
     sendHealth(){
-      this.health.push({
-        title: this.name,
-        detail: this.detail
-      })
       let config = {
         headers: {
           "Content-Type": "application/json",

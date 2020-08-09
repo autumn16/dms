@@ -19,7 +19,7 @@
 
                 <v-list-item-content>
                   <v-list-item-title>Admin</v-list-item-title>
-                  <v-list-item-subtitle>Last signing up: 26/07/2020</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{timestamp}}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
@@ -205,6 +205,7 @@ const axios = require('axios')
 export default {
   data() {
     return {
+      timestamp: '',
       room: '',
       email: '',
       university: '',
@@ -246,7 +247,7 @@ export default {
           link: "dashboard/feedback",
         },
         {
-          title: "Sanitation (COVID-19)",
+          title: "Sanitation",
           icon: "mdi-hand-water",
           link: "dashboard/sanitation",
         },
@@ -302,9 +303,29 @@ export default {
     },
   },
   created() {
+    setInterval(this.getNow, 1000)
+    this.getNow()
     this.getStudentInfo()
   },
   methods: {
+    getNow() {
+      
+      const today = new Date();
+
+      const date =
+        today.getDate() +
+        "/" +
+        (today.getMonth() + 1) +
+        "/" +
+        today.getFullYear();
+
+      const time = (today.getHours()<10?'0'+today.getHours():today.getHours())+ ":" + 
+                (today.getMinutes()<10?'0'+today.getMinutes():today.getMinutes())
+         + ":" + (today.getSeconds()<10?'0'+today.getSeconds():today.getSeconds());
+
+      const dateTime = date + " " + time;
+      this.timestamp = dateTime;
+    },
     updateInfo() {
       let config = {
         headers: {
@@ -348,16 +369,15 @@ export default {
       axios.get('http://admin-database.herokuapp.com/student/getAll')
       .then(Response => {
         this.userList = Response.data 
-        this.userLength = this.userList.length
-        console.log(this.userLength)
-        console.log(this)
+        this.userLength = this.userList.length  
         for(let i = 0; i < this.userLength; i++){
+          console.log(this.userList[i].room)
           this.users.push({
             dormUID: 10000 + i,
             name: this.userList[i].name,
             citizenId: this.userList[i].citizenId,
+            room: this.userList[i].room,
             email: this.userList[i].email,
-            room: 'WAITING',
             studentId: this.userList[i].studentId,
             university: this.userList[i].university
           })
