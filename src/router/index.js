@@ -10,17 +10,22 @@ import AdminDuty from '../views/dashboard/duty'
 
 import report from '../views/user-view/report'
 import UpdateInfo from '../views/user-view/updateInfo'
+
 import UHealth from '../views/user-view/health'
 import UFeedback from '../views/user-view/feedback'
+
 
 import Health from '../views/dashboard/health'
 import Sanitation from '../views/dashboard/sanitation'
 import VisitorRecord from '../views/dashboard/record'
 import Security from '../views/dashboard/security'
 import Feedback from '../views/dashboard/feedback'
+import Axios from 'axios'
 
 
 Vue.use(VueRouter)
+Vue.use(Axios)
+Vue.prototype.$axios = Axios
 
 const routes = [
   {
@@ -29,7 +34,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/sign-up',
+    path: '/signup',
     name: 'signingup',
     component: SignUp,
   },
@@ -89,6 +94,7 @@ const routes = [
     component:UpdateInfo,
   },
   {
+
     path: `/user-view/health`,
     name:'uhealth',
     component: UHealth,
@@ -98,6 +104,7 @@ const routes = [
     name: 'ufeedback',
     component: UFeedback,
   }
+
 ]
 
 const router = new VueRouter({

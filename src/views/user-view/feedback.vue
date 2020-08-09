@@ -47,7 +47,6 @@
 
 <script>
 const axios = require('axios')
-
 export default {
   data() {
     return {
@@ -78,12 +77,10 @@ export default {
         : undefined;
     },
   },
-
   created() {
     this.getDataFromServer();
     this.getNumber();
   },
-
   methods: {
     getNumber(){
       axios.get('http://admin-database.herokuapp.com/feedback/students/' + this.id )

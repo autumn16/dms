@@ -27,7 +27,6 @@
 
 <script>
 const axios = require('axios')
-
 export default {
   data() {
     return {
@@ -59,12 +58,10 @@ export default {
         : undefined;
     },
   },
-
   created() {
     this.getDataFromServer();
     this.getNumber();
   },
-
   methods: {
     
     updateInfo(){

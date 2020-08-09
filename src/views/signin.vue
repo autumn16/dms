@@ -65,6 +65,7 @@ export default {
   data: () => ({
     cmp_username: [],
     cmp_password: [],
+    ID:'',
     name: [],
     citizenId: [],
     numberOfStudent: 0,
@@ -86,12 +87,13 @@ export default {
           this.cmp_password[i] = Response.data[i].password
           this.name[i] = Response.data[i].name
           this.citizenId[i] = Response.data[i].citizenId
+          this.ID=Response.data[i].studentId
           /*
           console.log(this.cmp_username[i])
           console.log(this.cmp_password[i])
           */
         } 
-        // console.log(this.numberOfStudent)
+          
       })
     },
     checkSigningIn() {
@@ -107,7 +109,7 @@ export default {
           if(username === this.cmp_username[i] && password === this.cmp_password[i]){
             check = true
             alert('Login successfully, click OK to continue')
-            this.$router.replace("/user-view/report")
+            this.$router.replace(`/user-view/report`)
             this.$store.state.gloUsername = this.name[i]
             this.$store.state.gloUserId = this.citizenId[i]
             // this.$store.setUserInfo(this.name[i], this.citizenId[i])

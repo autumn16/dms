@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
 import store from './store';
+import Axios from 'axios'
+
 /*
 import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/dist/jquery.min.js";
@@ -10,10 +12,11 @@ import "popper.js/dist/umd/popper.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 */ 
 Vue.config.productionTip = false
+Vue.prototype.$axios = Axios
 
 new Vue({
   router,
   vuetify,
-  store,
+  store,    
   render: h => h(App)
 }).$mount('#app')

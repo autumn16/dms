@@ -151,7 +151,9 @@ export default {
           icon: "mdi-clover",
           link: "../dashboard/record",
         },
+
         { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
+
       ],
     };
   },

@@ -42,6 +42,7 @@
         <v-row>
           <v-col md="2"></v-col>
           <v-col md="auto">
+
             <h2
               style="color: white; text-shadow: 1px 1px 20px red;"
             >NOTIFICATION AND MESSAGES FROM ADMIN</h2>
@@ -150,8 +151,15 @@ export default {
           title: "Send Feedback",
           icon: "mdi-message-outline",
           link: "./feedback"
+
         },
-        { title: "Logout", icon: "mdi-logout-variant", link: "../sign-in" },
+        {
+          title: "Sanitation (COVID-19)",
+          icon: "mdi-hand-water",
+          link: "sanitation",
+        },
+        { title: "Logout", icon: "mdi-logout-variant", link: "../../../signin" },
+
       ],
       permanent: true,
       background: false,
